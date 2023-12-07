@@ -1,36 +1,45 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class SpringArm : MonoBehaviour
 {
-    [SerializeField] Transform cameraTransform = null;
-    [SerializeField, Range(1, 10)] float armLength = 5;
-    [SerializeField, Range(1, 10)] float upDistance = 5;
+    [SerializeField, Range(1, 10), Header("Spring Arm Settings")] float length = 5;
+    [SerializeField, Range(0, 360)] float angle = 0;
+    [SerializeField, Range(0, 10)] float height = 2;
+    [SerializeField, Header("Camera")] AttachedCamera attachedCamera = null;
 
-    public Vector3 FinalPoint => transform.position + transform.forward * -armLength + transform.up * upDistance;
-    private void LateUpdate()
+    public AttachedCamera AttachedCamera => attachedCamera;
+    public float Angle { get { return angle; } set { angle = value; } }
+    private void Start()
     {
-        UpdateCameraPosition(GetCameraAlpha());
+        Init();
     }
 
-    float GetCameraAlpha()
+    private void Update()
     {
-        bool _result = Physics.Raycast(new Ray(transform.position, transform.forward * -armLength), out RaycastHit _hitInfo, armLength);
-        return _result ? (_hitInfo.distance / armLength) : 1;
-    }
-
-    void UpdateCameraPosition(float _alpha = 1)
-    {
-        if (!cameraTransform)
+        if (!attachedCamera)
             return;
-        cameraTransform.transform.position = Vector3.Lerp(transform.position, FinalPoint, _alpha);
+        UpdateCameraPosition();
     }
-
+    void Init()
+    {
+        if (!attachedCamera)
+            return;
+        attachedCamera.SetTarget(transform);
+    }
     private void OnDrawGizmos()
     {
-        Gizmos.color = cameraTransform ? Color.red : Color.gray;
-        Gizmos.DrawRay(transform.position, transform.forward * -armLength + transform.up * upDistance);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(transform.position, transform.position + new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad) * length, height, Mathf.Sin(angle * Mathf.Deg2Rad) * length));
+        Gizmos.color = Color.red;
+    }
+
+    private void UpdateCameraPosition()
+    {
+        float _rad = angle * Mathf.Deg2Rad;
+        attachedCamera.transform.position = transform.position + new Vector3(Mathf.Cos(_rad) * length, height, Mathf.Sin(_rad) * length);
     }
 }
