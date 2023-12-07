@@ -1,13 +1,17 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Ichigo : MonoBehaviour
 {
+    public event Action<int> OnTakeDamages;
     [SerializeField] PlayerInputs controls = null;
     [SerializeField] SpringArm arm = null;
     [SerializeField,Range(1,10)] int maxLife = 5;
+
+    [SerializeField] ThrowComponent component = null;
 
     [SerializeField] List<Bomb> inventory = null;
     [SerializeField] Bomb currentBomb = null;
@@ -16,16 +20,13 @@ public class Ichigo : MonoBehaviour
     bool isDead = false;
     bool inInvincibility = false;
 
-    bool canTakeBomb = false;
-    bool canShootBomb = false;
-    bool canDropBomb = false;
-    bool canThrowBomb = false;
+    bool hasBomb = false;
+    int currentIndex = 0;
 
 
     #region inputs
     [SerializeField,HideInInspector] InputAction move = null;
     [SerializeField,HideInInspector] InputAction rotate = null;
-    [SerializeField,HideInInspector] InputAction takeBomb = null;
     [SerializeField,HideInInspector] InputAction shootBomb = null;
     [SerializeField,HideInInspector] InputAction throwBomb = null;
     [SerializeField,HideInInspector] InputAction dropBomb = null;
@@ -34,6 +35,7 @@ public class Ichigo : MonoBehaviour
     private void Awake()
     {
         controls = new PlayerInputs();
+        OnTakeDamages += TakeDamages;
     }
     private void Start()
     {
@@ -46,8 +48,6 @@ public class Ichigo : MonoBehaviour
         move.Enable();
         rotate = controls.Player.Rotate;
         rotate.Enable();
-        takeBomb = controls.Player.TakeBomb;
-        takeBomb.Enable();
         shootBomb = controls.Player.ShootBomb;
         shootBomb.Enable();
         throwBomb = controls.Player.ThrowBomb;
@@ -55,6 +55,9 @@ public class Ichigo : MonoBehaviour
         dropBomb = controls.Player.DropBomb;
         dropBomb.Enable();
 
+        shootBomb.performed += ShootBomb;
+        throwBomb.performed += ThrowBomb;
+        dropBomb .performed += DropBomb;
     }
     private void OnDrawGizmos()
     {
@@ -72,6 +75,16 @@ public class Ichigo : MonoBehaviour
     {
         Move();
         Rotate();
+
+        if (!hasBomb)
+            return;
+        KeepBomb();
+    }
+
+
+    void SetHasBomb()
+    {
+        hasBomb = false;
     }
     #region Movements
     void Move()
@@ -108,5 +121,70 @@ public class Ichigo : MonoBehaviour
 
     }
 
+    void KeepBomb()
+    {
+        Bomb _bomb = component.CurrentBomb;
+        if(!_bomb) return;
+        _bomb.transform.position = transform.position;
+    }
+    void SelectBomb()
+    {
+        Bomb _bomb = Instantiate<Bomb>(inventory[currentIndex],transform.position + (Vector3.up * 10),transform.rotation);
+        //onBombSpawn.Broadcast(true);
+        //_bomb->AttachToActor();
+        if (!component)
+            return;
+        component.CurrentBomb = _bomb;
+        if (!_bomb)
+            return;
+        hasBomb = true;
+        component.CurrentBomb.OnExplode += SetHasBomb;
+    }
 
+    void DropBomb(InputAction.CallbackContext _context)
+    {
+        if (!hasBomb) return;
+        Bomb _bomb = component.CurrentBomb;
+        if (!component || !_bomb)
+            return;
+        component.Throw(Vector3.zero, Vector3.zero);
+        component.CurrentBomb.OnExplode -= SetHasBomb;
+        hasBomb = false;
+        //onBombSpawn.Broadcast(false);
+    }
+
+    void ShootBomb(InputAction.CallbackContext _context)
+    {
+            if (!hasBomb)
+            {
+                SelectBomb();
+            }
+            else if (hasBomb)
+            {
+                Bomb _bomb = component.CurrentBomb;
+                if (!component || !_bomb)
+                    return;
+                component.Throw(transform.forward,Vector3.zero);
+                component.CurrentBomb.OnExplode -= SetHasBomb;
+                hasBomb = false;
+                //onBombSpawn.Broadcast(false);
+            }
+    }
+    void ThrowBomb(InputAction.CallbackContext _context)
+        {
+            Bomb _bomb = component.CurrentBomb;
+            if (!hasBomb)
+            {
+                SelectBomb();
+            }
+            else if (hasBomb)
+            {
+                if (!component || !_bomb)
+                    return;
+                component.Throw(transform.forward, transform.up);
+                component.CurrentBomb.OnExplode -= SetHasBomb;
+                hasBomb = false;
+                //onBombSpawn.Broadcast(false);
+            }
+    }
 }

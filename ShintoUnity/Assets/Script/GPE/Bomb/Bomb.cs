@@ -7,7 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(SphereCollider), typeof(Rigidbody))]
 public class Bomb : GPEComponent
 {
-    public event Action<Bomb> OnExplode = null;
+    public event Action OnExplode = null;
 
     [SerializeField, Header("Physics")] Rigidbody body = null;
     [SerializeField] LayerMask bounceLayer;
@@ -74,7 +74,7 @@ public class Bomb : GPEComponent
 
     private void Explode()
     {
-        OnExplode?.Invoke(this);
+        OnExplode?.Invoke();
         PaternExplosion _patern = Instantiate<PaternExplosion>(patern, transform.position, PaternRotation);
         Destroy(gameObject);
     }

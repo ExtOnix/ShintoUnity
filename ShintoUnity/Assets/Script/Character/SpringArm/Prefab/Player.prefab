@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 558868903043928072}
   - component: {fileID: 5615575361098101934}
   - component: {fileID: 2748691054016063069}
+  - component: {fileID: 9164500663225736632}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -117,6 +118,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arm: {fileID: 2638181580710528984}
+  maxLife: 5
+  component: {fileID: 9164500663225736632}
+  inventory:
+  - {fileID: 302927157120114174, guid: e27e9e4f536040847a76e618016f4832, type: 3}
+  currentBomb: {fileID: 0}
   move:
     m_Name: 
     m_Type: 0
@@ -131,15 +137,6 @@ MonoBehaviour:
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: a1ee4188-fb4e-4234-9f38-ae4526ffa61d
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  takeBomb:
-    m_Name: 
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: c213c96c-5a21-4699-9ca7-726cbac0474d
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -224,6 +221,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!114 &9164500663225736632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2667933451683214740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f6983d8d0c19474688a8da941af71f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forwardSpeed: 1
+  upSpeed: 1
 --- !u!1 &3843703987722719210
 GameObject:
   m_ObjectHideFlags: 0
