@@ -20,4 +20,14 @@ public class ExplosionCollider : MonoBehaviour
     {
         onTriggerEnter?.Invoke(other);
     }
+
+
+    public void DrawCollider(Color _color)
+    {
+        Gizmos.color = _color;
+        Gizmos.matrix = transform.localToWorldMatrix;
+        Gizmos.DrawWireCube(Vector3.zero, boxCollider.size);
+    }
+
+
 }

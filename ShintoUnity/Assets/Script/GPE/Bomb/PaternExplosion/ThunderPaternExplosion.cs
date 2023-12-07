@@ -34,8 +34,17 @@ public class ThunderPaternExplosion : PaternExplosion
     {
         if (HasDoEffect || damagelist.Contains(other.gameObject))
             return;
-
-        Debug.Log(other.gameObject.name);
+        Bomb _bomb = other.GetComponent<Bomb>();
+        if (_bomb)
+            _bomb.Explode();
+        
         damagelist.Add(other.gameObject);
+    }
+
+
+    void OnDrawGizmos()
+    {
+        for (int i = 0; i < colliders.Count; i++)
+            colliders[i].DrawCollider(Color.yellow);
     }
 }

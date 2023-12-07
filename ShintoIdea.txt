@@ -1,0 +1,14 @@
+Shinto:
+
+
+-LifeGestionComponent:
+qui aurais en lui tout le system de vie avec les event de damages et l'invulnerabilité, il serais plus partique pour tout les momment où on doit infligér des dégats au perssonage ou aux ennemies car comme ça pas besoinde faire 2 cast mais juste un GetComponent et si il n'existe pas et bah on ne fait pas les damages
+
+life 
+invulnerabilityTime
+timer
+event onTakeDamage()
+event lifeChange(int life)
+
+
+-

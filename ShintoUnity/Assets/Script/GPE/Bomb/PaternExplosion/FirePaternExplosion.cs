@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.ShaderGraph.Drawing;
 using UnityEngine;
 
 public class FirePaternExplosion : PaternExplosion
@@ -33,7 +34,28 @@ public class FirePaternExplosion : PaternExplosion
         if (HasDoEffect || damagelist.Contains(other.gameObject))
             return;
 
+        Bomb _bomb = other.GetComponent<Bomb>();
+        if (_bomb)
+            TouchBomb(_bomb);
+
         Debug.Log(other.gameObject.name);
         damagelist.Add(other.gameObject);
+    }
+
+
+    void TouchBomb(Bomb _bomb)
+    {
+        if (_bomb.BombName == "Fire")
+        {
+            _bomb.Explode();
+            return;
+        }
+        Destroy(_bomb.gameObject);
+    }
+
+    void OnDrawGizmos()
+    {
+        for (int i = 0; i < colliders.Count; i++)
+            colliders[i].DrawCollider(Color.red);
     }
 }

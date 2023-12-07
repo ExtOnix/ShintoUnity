@@ -12,9 +12,13 @@ public class Bomb : GPEComponent
     [SerializeField, Header("Physics")] Rigidbody body = null;
     [SerializeField] LayerMask bounceLayer;
     [SerializeField] Vector3 force = new Vector3(0, .6f, .2f);
-    [SerializeField, Header("Explsion")] PaternExplosion patern = null;
+    [SerializeField, Header("Explosion")] PaternExplosion patern = null;
     [SerializeField, Range(.1f, 100)] float explodeTime = 2;
     [SerializeField, Range(0, 1)] float holdingBombExplodePercentage = 1;
+    [SerializeField, Header("Identity")] string bombName = "Bomb";
+
+    public string BombName => bombName;
+
 
     float explodeTimer = 0;
     bool isActive = true;
@@ -72,7 +76,7 @@ public class Bomb : GPEComponent
         }
     }
 
-    private void Explode()
+    public void Explode()
     {
         OnExplode?.Invoke();
         PaternExplosion _patern = Instantiate<PaternExplosion>(patern, transform.position, PaternRotation);

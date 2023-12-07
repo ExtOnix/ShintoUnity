@@ -154,3 +154,4 @@ MonoBehaviour:
   patern: {fileID: 2420463599920299204, guid: 2a5b7c8b49b1eed468b3361762fd579e, type: 3}
   explodeTime: 2
   holdingBombExplodePercentage: 1
+  bombName: Ice
