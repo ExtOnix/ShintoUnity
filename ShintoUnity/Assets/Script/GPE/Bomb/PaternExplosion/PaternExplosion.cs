@@ -11,7 +11,7 @@ public class PaternExplosion : GPEComponent
     [SerializeField, Range(.1f, 100)] float duration = 3;
     [SerializeField] protected bool HasDoEffect = false;
 
-    protected Dictionary<string, GameObject> damagesObjects = new();
+    protected List<GameObject> damagelist = new();
 
     protected virtual void Start()
     {
@@ -21,12 +21,16 @@ public class PaternExplosion : GPEComponent
 
     void Update()
     {
-        
     }
 
 
     void DestroyPatern()
     {
         Destroy(gameObject);
+    }
+
+    protected void SetHasDoEffectEnable()
+    {
+        HasDoEffect = true;
     }
 }

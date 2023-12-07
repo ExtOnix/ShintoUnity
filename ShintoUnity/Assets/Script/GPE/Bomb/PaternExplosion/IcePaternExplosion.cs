@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
@@ -15,6 +16,7 @@ public class IcePaternExplosion : PaternExplosion
     protected override void Start()
     {
         base.Start();
+        InvokeRepeating("SetHasDoEffectEnable", .1f, .1f);
     }
 
     void Update()
@@ -31,10 +33,10 @@ public class IcePaternExplosion : PaternExplosion
 
     void OnTriggerEnter(Collider other)
     {
-        if (damagesObjects.ContainsKey(other.gameObject.name))
+        if (HasDoEffect || damagelist.Contains(other.gameObject)) 
             return;
         Debug.Log(other.gameObject.name);
-        damagesObjects.Add(other.gameObject.name, other.gameObject);
+        damagelist.Add(other.gameObject);
     }
 
 }
