@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PaternExplosion : GPEComponent
 {
@@ -13,16 +14,7 @@ public class PaternExplosion : GPEComponent
 
     protected List<GameObject> damagelist = new();
 
-    protected virtual void Start()
-    {
-        InvokeRepeating("DestroyPatern", duration, duration);
-        Debug.Log("start");
-    }
-
-    void Update()
-    {
-    }
-
+    protected virtual void Start() => InvokeRepeating("DestroyPatern", duration, duration);
 
     void DestroyPatern()
     {
