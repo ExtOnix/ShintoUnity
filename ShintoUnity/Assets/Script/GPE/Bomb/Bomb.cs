@@ -13,7 +13,6 @@ public class Bomb : GPEComponent
 
     [SerializeField, Header("Physics")] Rigidbody body = null;
     [SerializeField] LayerMask bounceLayer;
-    [SerializeField] Vector3 force = new Vector3(0, .6f, .2f);
     [SerializeField, Header("Explosion")] PaternExplosion patern = null;
     [SerializeField, Range(.1f, 100)] float explodeTime = 2;
     [SerializeField, Range(0, 1)] float holdingBombExplodePercentage = 1;
@@ -27,7 +26,6 @@ public class Bomb : GPEComponent
     float percentageSpeed = 1;
 
     bool isLaunch = false;
-    //bool bouncing = false;
 
 
     public Quaternion PaternRotation => new Quaternion(0, transform.eulerAngles.y, 0, 0);
@@ -45,17 +43,7 @@ public class Bomb : GPEComponent
         isLaunch = false;
     }
 
-
-    void Start()
-    {
-        //body.AddRelativeForce(force, ForceMode.Impulse);
-    }
-
-    void Update()
-    {
-        UpdateTimer();
-        UpdateBounce();
-    }
+    void Update() => UpdateTimer();
 
     void OnTriggerEnter(Collider other)
     {
@@ -98,30 +86,5 @@ public class Bomb : GPEComponent
     {
         Gizmos.color = Color.Lerp(Color.green, Color.red, ExplosionProgress);
         Gizmos.DrawSphere(transform.position + Vector3.up, .5f * (1 - ExplosionProgress));
-
-
-
-        //Gizmos.color = Color.red;
-        //Gizmos.DrawSphere((transform.position + new Vector3(0, -.1f, 0) * .1f), .5f);
-        //Gizmos.color = Color.blue;
-        //Vector3 _dir = transform.forward;
-        //Gizmos.DrawLine(transform.position, transform.position + _dir * 10);
-    }
-    void UpdateBounce()
-    {
-        //if (bouncing)
-        //    return;
-        //bool _hit = Physics.SphereCast(transform.position, .5f, new Vector3(0, -.1f, 0), out RaycastHit _result, .1f);
-        //if(_hit)
-        //{
-            //Debug.Log("ca passe");
-            //transform.rotation = Quaternion.LookRotation(_result.point - transform.position);
-            //Vector3 _dir = transform.forward;
-            //transform.forward = Vector3.Reflect(_dir, _result.normal);
-            //body.velocity.Set(body.velocity.x, 0, body.velocity.z);
-            //force = force * .5f;
-            //body.AddRelativeForce(force, ForceMode.Impulse);
-            //bouncing = true;
-        //}
     }
 }

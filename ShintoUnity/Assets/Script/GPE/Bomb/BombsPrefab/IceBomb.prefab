@@ -93,7 +93,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3483698610897292534}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 2e5cecb423d783d45b94faa12e77f72f, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -150,7 +150,7 @@ MonoBehaviour:
   bounceLayer:
     serializedVersion: 2
     m_Bits: 768
-  force: {x: 0, y: 800, z: 400}
+  force: {x: 0, y: 200, z: 100}
   patern: {fileID: 2420463599920299204, guid: 2a5b7c8b49b1eed468b3361762fd579e, type: 3}
   explodeTime: 2
   holdingBombExplodePercentage: 1
