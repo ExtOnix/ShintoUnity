@@ -71,6 +71,6 @@ MonoBehaviour:
   duration: 3
   HasDoEffect: 0
   radius: 3
-  windNumber: 10
-  prefab: {fileID: 3483698610897292534, guid: e27e9e4f536040847a76e618016f4832, type: 3}
+  windNumber: 4
+  windRef: {fileID: 2678852641362325060, guid: f0967cfbbabd75b42921c72ff909d063, type: 3}
   boxCollider: {fileID: 6128439223408079107}

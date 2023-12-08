@@ -8,6 +8,7 @@ public class IcePaternExplosion : PaternExplosion
 {
     [SerializeField, Header("Ice"), Range(1, 100)] float diameter = 3;
     [SerializeField] SphereCollider paterncollider = null;
+    [SerializeField, Range(.1f, 100)] float freezeTime = 2;
 
     void Awake()
     {
@@ -35,8 +36,19 @@ public class IcePaternExplosion : PaternExplosion
             return;
         Bomb _bomb = other.GetComponent<Bomb>();
         if (_bomb)
-            _bomb.StopTime(2, () => { Debug.Log("Time Restart"); });
+            TouchBomb(_bomb);
         damagelist.Add(other.gameObject);
+    }
+
+
+    void TouchBomb(Bomb _bomb)
+    {
+        if (_bomb.BombName == "Ice")
+        {
+            _bomb.Explode();
+            return;
+        }
+        _bomb.StopTime(freezeTime, null);
     }
 
 }

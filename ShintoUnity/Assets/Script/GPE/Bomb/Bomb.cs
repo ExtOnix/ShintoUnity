@@ -47,7 +47,6 @@ public class Bomb : GPEComponent
 
     void OnTriggerEnter(Collider other)
     {
-        
     }
 
     void UpdateTimer()

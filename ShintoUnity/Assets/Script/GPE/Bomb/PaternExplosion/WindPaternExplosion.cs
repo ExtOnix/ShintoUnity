@@ -6,7 +6,7 @@ public class WindPaternExplosion : PaternExplosion
 {
     [SerializeField, Header("Wind"),Range(0, 100)] float radius = 1;
     [SerializeField, Range(0, 360)] int windNumber = 4;
-    [SerializeField] GameObject prefab = null;
+    [SerializeField] Wind windRef = null;
 
     [SerializeField] BoxCollider boxCollider = null;
 
@@ -30,8 +30,8 @@ public class WindPaternExplosion : PaternExplosion
     {
         for (int i = 0; i < 360; i += 360/windNumber)
         {
-            GameObject _obj = Instantiate(prefab);
-            _obj.transform.position = transform.position + MathUtils.GetTrigoPoint(i, radius);
+            Vector3 _point = transform.position + MathUtils.GetTrigoPoint(i, radius);
+            Wind _wind = Instantiate<Wind>(windRef, _point, Quaternion.LookRotation(_point - transform.position));
         }
     }
 
