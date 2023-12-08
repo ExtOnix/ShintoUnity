@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7489975027200922137}
   - component: {fileID: 4766107914231534961}
   - component: {fileID: 1048670319001383051}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: HorizontalBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1216
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 6564869018935832222}
   - component: {fileID: 4824997573186325949}
   - component: {fileID: 1490948174562517665}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: VerticalBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,7 +110,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1216
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 3313024805403607389}
   - component: {fileID: 2374174484119630967}
   - component: {fileID: 3777712853775562538}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: DiagonalLeftBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1216
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -212,7 +212,7 @@ GameObject:
   - component: {fileID: 8049880788375132496}
   - component: {fileID: 2414620259444065019}
   - component: {fileID: 8579759030753109770}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: DiagonalRightBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -244,7 +244,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1216
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0

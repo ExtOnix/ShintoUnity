@@ -9,7 +9,6 @@ using UnityEngine;
 public class Bomb : GPEComponent
 {
     public event Action OnExplode = null;
-    public event Action OnTimeStopFinish = null;
 
     [SerializeField, Header("Physics")] Rigidbody body = null;
     [SerializeField] LayerMask bounceLayer;
@@ -25,7 +24,7 @@ public class Bomb : GPEComponent
     bool isActive = true;
     float percentageSpeed = 1;
 
-    bool isLaunch = false;
+    //bool isLaunch = false;
 
 
     public Quaternion PaternRotation => new Quaternion(0, transform.eulerAngles.y, 0, 0);
@@ -34,13 +33,13 @@ public class Bomb : GPEComponent
     {
         body.useGravity = true;
         percentageSpeed = 1;
-        isLaunch = true;
+        //isLaunch = true;
     }
     public void Take()
     {
         body.useGravity = false;
         percentageSpeed = holdingBombExplodePercentage;
-        isLaunch = false;
+        //isLaunch = false;
     }
 
     void Update() => UpdateTimer();

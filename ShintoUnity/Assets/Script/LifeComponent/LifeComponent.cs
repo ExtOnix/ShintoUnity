@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class LifeComponent : MonoBehaviour
 {
@@ -23,7 +24,6 @@ public class LifeComponent : MonoBehaviour
         life -= _damage;
         Debug.Log(life);
         //onLifeChange.Broadcast(life);
-        //inInvincibility = true;
         //onInvinsibilityStart.Broadcast();
         if (life == 0)
         {
@@ -31,6 +31,12 @@ public class LifeComponent : MonoBehaviour
             //onDie.Broadcast();
             return;
         }
+        inInvincibility = true;
+        Invoke("InvincibilityOff", 2);
+    }
 
+    void InvincibilityOff()
+    {
+        inInvincibility = false;
     }
 }

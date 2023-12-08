@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 468e6ab2b190b4142aa4d36215a88514, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 3
   playerDamage: 1
   duration: 3
   HasDoEffect: 0
@@ -67,7 +67,7 @@ GameObject:
   - component: {fileID: 6632138915570855704}
   - component: {fileID: 2820060258893654186}
   - component: {fileID: 3797215324605337433}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: HorizontalBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1216
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 3636022559073261247}
   - component: {fileID: 4003262128888141154}
   - component: {fileID: 3510239769993618302}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: VerticalBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,7 +166,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1216
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0

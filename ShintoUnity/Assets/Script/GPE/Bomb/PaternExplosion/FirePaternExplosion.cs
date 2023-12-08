@@ -38,7 +38,9 @@ public class FirePaternExplosion : PaternExplosion
         if (_bomb)
             TouchBomb(_bomb);
 
-        Debug.Log(other.gameObject.name);
+        LifeComponent _life = other.GetComponent<LifeComponent>();
+        if (_life)
+            _life.TakeDamages(other.GetComponent<Ichigo>() ? playerDamage : damage);
         damagelist.Add(other.gameObject);
     }
 

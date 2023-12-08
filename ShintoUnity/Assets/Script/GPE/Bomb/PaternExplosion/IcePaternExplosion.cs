@@ -37,6 +37,10 @@ public class IcePaternExplosion : PaternExplosion
         Bomb _bomb = other.GetComponent<Bomb>();
         if (_bomb)
             TouchBomb(_bomb);
+
+        LifeComponent _life = other.GetComponent<LifeComponent>();
+        if (_life)
+            _life.TakeDamages(other.GetComponent<Ichigo>() ? playerDamage : damage);
         damagelist.Add(other.gameObject);
     }
 

@@ -34,14 +34,15 @@ public class ThunderPaternExplosion : PaternExplosion
     {
         if (HasDoEffect || damagelist.Contains(other.gameObject))
             return;
+
         Bomb _bomb = other.GetComponent<Bomb>();
         if (_bomb)
             _bomb.Explode();
+
         LifeComponent _life = other.GetComponent<LifeComponent>();
-        if (_life && other.GetComponent<Ichigo>())
-            _life.TakeDamages(playerDamage);
-        else
-            _life.TakeDamages(damage);
+        if (_life)
+            _life.TakeDamages(other.GetComponent<Ichigo>() ? playerDamage : damage);
+        damagelist.Add(other.gameObject);
     }
 
 

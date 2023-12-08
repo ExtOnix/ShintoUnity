@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8766562575527439077}
   - component: {fileID: 4017245339294532175}
   - component: {fileID: 2420463599920299204}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: IcePatern
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66,9 +66,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae0f2ecaa9ebb2940b7a154216aaad3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 2
   playerDamage: 1
   duration: 3
   HasDoEffect: 0
   diameter: 3
   paterncollider: {fileID: 4017245339294532175}
+  freezeTime: 2
