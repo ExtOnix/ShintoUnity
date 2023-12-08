@@ -55,7 +55,14 @@ public class FirePaternExplosion : PaternExplosion
 
     void OnDrawGizmos()
     {
-        //for (int i = 0; i < colliders.Count; i++)
-        //    colliders[i].DrawCollider(Color.red);
+        Matrix4x4 _matrix = new();
+        Quaternion _rotation = new();
+        for (int i = 0, index = 0; i < 180; i += 180 / colliders.Count, index++)
+        {
+            _rotation = transform.rotation;
+            _rotation.eulerAngles += new Vector3(0, i, 0);
+            _matrix = Matrix4x4.TRS(transform.position, _rotation, colliders[index].transform.lossyScale);
+            colliders[index].DrawCollider(Color.red, _matrix, new Vector3(length, height, width));
+        }
     }
 }

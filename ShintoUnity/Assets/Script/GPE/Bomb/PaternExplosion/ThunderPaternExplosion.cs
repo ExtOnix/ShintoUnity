@@ -44,12 +44,14 @@ public class ThunderPaternExplosion : PaternExplosion
 
     void OnDrawGizmos()
     {
-        //for (int i = 0, index = 0; i < 180; i += 180 / colliders.Count, index++)
-        //{
-        //    Quaternion _rotation = colliders[index].transform.rotation;
-        //    _rotation.eulerAngles += new Vector3(0, i, 0);
-        //    Matrix4x4 _matrix = new Matrix4x4(transform.position, _rotation,  colliders);
-        //    colliders[i]
-        //}
+        Matrix4x4 _matrix = new();
+        Quaternion _rotation = new();
+        for (int i = 0, index = 0; i < 180; i += 180 / colliders.Count, index++)
+        {
+            _rotation = transform.rotation;
+            _rotation.eulerAngles += new Vector3(0, i, 0);
+            _matrix = Matrix4x4.TRS(transform.position, _rotation, colliders[index].transform.lossyScale);
+            colliders[index].DrawCollider(Color.yellow, _matrix, new Vector3(length, height, width));
+        }
     }
 }
