@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream:ShintoUnity/Assets/Script/GPE/Block/Block.cs.meta
 guid: 2ff8c7acd935ee943bc89fcd6c08316e
+=======
+guid: d1296c13580d083499f6d0cf44bf0d5a
+>>>>>>> Stashed changes:ShintoUnity/Assets/Script/LifeComponent/LifeComponent.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
