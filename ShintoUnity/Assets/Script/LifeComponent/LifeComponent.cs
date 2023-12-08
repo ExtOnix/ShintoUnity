@@ -5,27 +5,23 @@ using UnityEngine;
 
 public class LifeComponent : MonoBehaviour
 {
-    public event Action<int> OnTakeDamages;
 
     [SerializeField, Range(1, 10)] int maxLife = 5;
     int life = 1;
     bool isDead = false;
     bool inInvincibility = false;
 
-    private void Awake()
-    {
-        OnTakeDamages += TakeDamages;
-    }
     private void Start()
     {
         life = maxLife;
     }
 
-    void TakeDamages(int _damage)
+    public void TakeDamages(int _damage)
     {
         if (isDead || inInvincibility)
             return;
         life -= _damage;
+        Debug.Log(life);
         //onLifeChange.Broadcast(life);
         //inInvincibility = true;
         //onInvinsibilityStart.Broadcast();

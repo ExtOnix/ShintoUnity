@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
+[RequireComponent(typeof(LifeComponent), typeof(ThrowComponent))]
 public class Ichigo : MonoBehaviour
 {
     [SerializeField] PlayerInputs controls = null;

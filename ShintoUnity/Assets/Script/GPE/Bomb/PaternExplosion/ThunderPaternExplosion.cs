@@ -37,8 +37,11 @@ public class ThunderPaternExplosion : PaternExplosion
         Bomb _bomb = other.GetComponent<Bomb>();
         if (_bomb)
             _bomb.Explode();
-        
-        damagelist.Add(other.gameObject);
+        LifeComponent _life = other.GetComponent<LifeComponent>();
+        if (_life && other.GetComponent<Ichigo>())
+            _life.TakeDamages(playerDamage);
+        else
+            _life.TakeDamages(damage);
     }
 
 
