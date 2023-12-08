@@ -5,7 +5,7 @@ using UnityEngine;
 public class AttachedCamera : MonoBehaviour
 {
     Transform target = null;
-    private void Update()
+    private void LateUpdate()
     {
         LookAtTarget(target);
     }
@@ -16,6 +16,6 @@ public class AttachedCamera : MonoBehaviour
     }
     private void LookAtTarget(Transform _target)
     {
-        transform.rotation = Quaternion.LookRotation(_target.position - transform.position);
+        transform.LookAt(_target);
     }
 }

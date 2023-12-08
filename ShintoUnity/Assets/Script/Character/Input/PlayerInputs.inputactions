@@ -24,21 +24,12 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "TakeBomb",
-                    "type": "Button",
-                    "id": "86938efa-72e5-47b1-afc9-7c8609907b82",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Press",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "ShootBomb",
                     "type": "Button",
                     "id": "4f8db994-019e-401c-8102-dc198fe8c4b4",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press",
+                    "interactions": "Press(behavior=2)",
                     "initialStateCheck": false
                 },
                 {
@@ -58,6 +49,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ScrollUp",
+                    "type": "Button",
+                    "id": "96a31d80-38b3-4a4e-af93-2a1f70ff9b4c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ScrollDown",
+                    "type": "Button",
+                    "id": "270d7523-f588-4027-9014-3336929e2162",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -69,17 +78,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Rotate",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "42b19264-fda3-46da-9774-b1a361631eea",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "TakeBomb",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -192,6 +190,28 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "deef6e0e-d1e1-41dc-8363-0c07332c859b",
+                    "path": "<Keyboard>/leftCtrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ScrollUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c08152b5-f5e1-456f-a18f-c2a8d8da6e71",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ScrollDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

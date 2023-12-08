@@ -46,21 +46,12 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""TakeBomb"",
-                    ""type"": ""Button"",
-                    ""id"": ""86938efa-72e5-47b1-afc9-7c8609907b82"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": ""Press"",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""ShootBomb"",
                     ""type"": ""Button"",
                     ""id"": ""4f8db994-019e-401c-8102-dc198fe8c4b4"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Press"",
+                    ""interactions"": ""Press(behavior=2)"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -80,6 +71,24 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ScrollUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""96a31d80-38b3-4a4e-af93-2a1f70ff9b4c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ScrollDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""270d7523-f588-4027-9014-3336929e2162"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -91,17 +100,6 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Rotate"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""42b19264-fda3-46da-9774-b1a361631eea"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""TakeBomb"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -214,6 +212,28 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""deef6e0e-d1e1-41dc-8363-0c07332c859b"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ScrollUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c08152b5-f5e1-456f-a18f-c2a8d8da6e71"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ScrollDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -224,10 +244,11 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Rotate = m_Player.FindAction("Rotate", throwIfNotFound: true);
-        m_Player_TakeBomb = m_Player.FindAction("TakeBomb", throwIfNotFound: true);
         m_Player_ShootBomb = m_Player.FindAction("ShootBomb", throwIfNotFound: true);
         m_Player_ThrowBomb = m_Player.FindAction("ThrowBomb", throwIfNotFound: true);
         m_Player_DropBomb = m_Player.FindAction("DropBomb", throwIfNotFound: true);
+        m_Player_ScrollUp = m_Player.FindAction("ScrollUp", throwIfNotFound: true);
+        m_Player_ScrollDown = m_Player.FindAction("ScrollDown", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -291,20 +312,22 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Rotate;
-    private readonly InputAction m_Player_TakeBomb;
     private readonly InputAction m_Player_ShootBomb;
     private readonly InputAction m_Player_ThrowBomb;
     private readonly InputAction m_Player_DropBomb;
+    private readonly InputAction m_Player_ScrollUp;
+    private readonly InputAction m_Player_ScrollDown;
     public struct PlayerActions
     {
         private @PlayerInputs m_Wrapper;
         public PlayerActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Rotate => m_Wrapper.m_Player_Rotate;
-        public InputAction @TakeBomb => m_Wrapper.m_Player_TakeBomb;
         public InputAction @ShootBomb => m_Wrapper.m_Player_ShootBomb;
         public InputAction @ThrowBomb => m_Wrapper.m_Player_ThrowBomb;
         public InputAction @DropBomb => m_Wrapper.m_Player_DropBomb;
+        public InputAction @ScrollUp => m_Wrapper.m_Player_ScrollUp;
+        public InputAction @ScrollDown => m_Wrapper.m_Player_ScrollDown;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -320,9 +343,6 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @Rotate.started += instance.OnRotate;
             @Rotate.performed += instance.OnRotate;
             @Rotate.canceled += instance.OnRotate;
-            @TakeBomb.started += instance.OnTakeBomb;
-            @TakeBomb.performed += instance.OnTakeBomb;
-            @TakeBomb.canceled += instance.OnTakeBomb;
             @ShootBomb.started += instance.OnShootBomb;
             @ShootBomb.performed += instance.OnShootBomb;
             @ShootBomb.canceled += instance.OnShootBomb;
@@ -332,6 +352,12 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @DropBomb.started += instance.OnDropBomb;
             @DropBomb.performed += instance.OnDropBomb;
             @DropBomb.canceled += instance.OnDropBomb;
+            @ScrollUp.started += instance.OnScrollUp;
+            @ScrollUp.performed += instance.OnScrollUp;
+            @ScrollUp.canceled += instance.OnScrollUp;
+            @ScrollDown.started += instance.OnScrollDown;
+            @ScrollDown.performed += instance.OnScrollDown;
+            @ScrollDown.canceled += instance.OnScrollDown;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -342,9 +368,6 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @Rotate.started -= instance.OnRotate;
             @Rotate.performed -= instance.OnRotate;
             @Rotate.canceled -= instance.OnRotate;
-            @TakeBomb.started -= instance.OnTakeBomb;
-            @TakeBomb.performed -= instance.OnTakeBomb;
-            @TakeBomb.canceled -= instance.OnTakeBomb;
             @ShootBomb.started -= instance.OnShootBomb;
             @ShootBomb.performed -= instance.OnShootBomb;
             @ShootBomb.canceled -= instance.OnShootBomb;
@@ -354,6 +377,12 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @DropBomb.started -= instance.OnDropBomb;
             @DropBomb.performed -= instance.OnDropBomb;
             @DropBomb.canceled -= instance.OnDropBomb;
+            @ScrollUp.started -= instance.OnScrollUp;
+            @ScrollUp.performed -= instance.OnScrollUp;
+            @ScrollUp.canceled -= instance.OnScrollUp;
+            @ScrollDown.started -= instance.OnScrollDown;
+            @ScrollDown.performed -= instance.OnScrollDown;
+            @ScrollDown.canceled -= instance.OnScrollDown;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -375,9 +404,10 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnRotate(InputAction.CallbackContext context);
-        void OnTakeBomb(InputAction.CallbackContext context);
         void OnShootBomb(InputAction.CallbackContext context);
         void OnThrowBomb(InputAction.CallbackContext context);
         void OnDropBomb(InputAction.CallbackContext context);
+        void OnScrollUp(InputAction.CallbackContext context);
+        void OnScrollDown(InputAction.CallbackContext context);
     }
 }

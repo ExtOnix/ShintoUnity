@@ -122,7 +122,14 @@ MonoBehaviour:
   component: {fileID: 9164500663225736632}
   inventory:
   - {fileID: 302927157120114174, guid: e27e9e4f536040847a76e618016f4832, type: 3}
+  - {fileID: 5098943063749994925, guid: 1c730c28b66448648a53f1d1bfe6ddc4, type: 3}
+  - {fileID: 8642360290162072758, guid: 9229546b968c03a458e703bf37e8d382, type: 3}
+  - {fileID: 7240637675540350553, guid: ffac39594a1ff434f8e7db3f9db650a3, type: 3}
   currentBomb: {fileID: 0}
+  hitLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  length: 5
   move:
     m_Name: 
     m_Type: 0
@@ -164,6 +171,24 @@ MonoBehaviour:
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: 7e52a08f-2114-4f84-bbfc-f4f5b04b44e0
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  scrollUp:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: a2cbc9bc-035d-49fd-8333-7071cd4d6d29
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  scrollDown:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 737ab47e-4c6d-4897-a3b1-769c3ab64ec2
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -233,8 +258,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f6983d8d0c19474688a8da941af71f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forwardSpeed: 1
-  upSpeed: 1
+  forwardSpeed: 10000
+  upSpeed: 798
 --- !u!1 &3843703987722719210
 GameObject:
   m_ObjectHideFlags: 0

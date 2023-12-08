@@ -37,7 +37,6 @@ public class ThrowComponent : MonoBehaviour
         CurrentBomb.Launch();
         Rigidbody _body = CurrentBomb.GetComponent<Rigidbody>();
         _body.AddForce(_force, ForceMode.Impulse);
-        currentBomb = null;
         currentBomb.OnExplode -= BombExplode;
     }
 }

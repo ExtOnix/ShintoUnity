@@ -18,7 +18,7 @@ public class SpringArm : MonoBehaviour
         Init();
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         if (!attachedCamera)
             return;

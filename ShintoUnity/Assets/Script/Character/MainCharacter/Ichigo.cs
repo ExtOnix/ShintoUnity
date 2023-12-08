@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class Ichigo : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class Ichigo : MonoBehaviour
 
     [SerializeField] List<Bomb> inventory = null;
     [SerializeField] Bomb currentBomb = null;
+
+    [SerializeField] LayerMask hitLayer;
+    [SerializeField,Range(1,10)] int length = 5;
 
     int life = 10;
     bool isDead = false;
@@ -30,6 +34,8 @@ public class Ichigo : MonoBehaviour
     [SerializeField,HideInInspector] InputAction shootBomb = null;
     [SerializeField,HideInInspector] InputAction throwBomb = null;
     [SerializeField,HideInInspector] InputAction dropBomb = null;
+    [SerializeField,HideInInspector] InputAction scrollUp = null;
+    [SerializeField,HideInInspector] InputAction scrollDown = null;
     #endregion
 
     private void Awake()
@@ -54,10 +60,16 @@ public class Ichigo : MonoBehaviour
         throwBomb .Enable();
         dropBomb = controls.Player.DropBomb;
         dropBomb.Enable();
+        scrollUp = controls.Player.ScrollUp;
+        scrollUp.Enable();
+        scrollDown = controls.Player.ScrollDown;
+        scrollDown.Enable();
 
         shootBomb.performed += ShootBomb;
         throwBomb.performed += ThrowBomb;
         dropBomb .performed += DropBomb;
+        scrollDown.performed += ScrollDown;
+        scrollUp.performed += ScrollUp;
     }
     private void OnDrawGizmos()
     {
@@ -125,11 +137,11 @@ public class Ichigo : MonoBehaviour
     {
         Bomb _bomb = component.CurrentBomb;
         if(!_bomb) return;
-        _bomb.transform.position = transform.position;
+        _bomb.transform.position = transform.position + (Vector3.up * 2);
     }
     void SelectBomb()
     {
-        Bomb _bomb = Instantiate<Bomb>(inventory[currentIndex],transform.position + (Vector3.up * 10),transform.rotation);
+        Bomb _bomb = Instantiate<Bomb>(inventory[currentIndex],transform.position + (Vector3.up * 2),transform.rotation);
         //onBombSpawn.Broadcast(true);
         //_bomb->AttachToActor();
         if (!component)
@@ -155,9 +167,13 @@ public class Ichigo : MonoBehaviour
 
     void ShootBomb(InputAction.CallbackContext _context)
     {
+        bool _test = _context.ReadValueAsButton();
+        if (!_test) return;
+        Debug.Log("test");
             if (!hasBomb)
             {
                 SelectBomb();
+                return;
             }
             else if (hasBomb)
             {
@@ -173,11 +189,7 @@ public class Ichigo : MonoBehaviour
     void ThrowBomb(InputAction.CallbackContext _context)
         {
             Bomb _bomb = component.CurrentBomb;
-            if (!hasBomb)
-            {
-                SelectBomb();
-            }
-            else if (hasBomb)
+            if (hasBomb)
             {
                 if (!component || !_bomb)
                     return;
@@ -186,5 +198,43 @@ public class Ichigo : MonoBehaviour
                 hasBomb = false;
                 //onBombSpawn.Broadcast(false);
             }
+    }
+
+    void ScrollUp(InputAction.CallbackContext _context)
+    {
+        if (inventory.Count == 0)
+            return;
+        if (currentIndex == inventory.Count - 1)
+            currentIndex = 0;
+        else
+            currentIndex++;
+        currentBomb = inventory[currentIndex];
+        //onBombChange.Broadcast(currentBomb.BombName);
+        Debug.Log(currentBomb.BombName);
+    }
+
+    void ScrollDown(InputAction.CallbackContext _context)
+    {
+        if (inventory.Count == 0)
+            return;
+        if (currentIndex == 0)
+            currentIndex = inventory.Count - 1;
+        else
+            currentIndex--;
+        currentBomb = inventory[currentIndex];
+        //onBombChange.Broadcast(currentBomb.BombName);
+        Debug.Log(currentBomb.BombName);
+    }
+
+    void DetectObject()
+    {
+        bool _hitFwd = Physics.Raycast(new Ray(transform.position, transform.forward), out RaycastHit _resultFwd, length, hitLayer);
+        if (_hitFwd)
+        {
+            //Block _block = _resultFwd.collider.GetComponent<Block>();
+            //if (!_block)
+            //    return;
+            //_resultFwd.collider.GetComponent<Block>().Move(_resultFwd);
+        }
     }
 }
