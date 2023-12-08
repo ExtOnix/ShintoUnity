@@ -87,6 +87,7 @@ public class Ichigo : MonoBehaviour
     {
         Move();
         Rotate();
+        DetectObject();
 
         if (!hasBomb)
             return;
@@ -231,10 +232,11 @@ public class Ichigo : MonoBehaviour
         bool _hitFwd = Physics.Raycast(new Ray(transform.position, transform.forward), out RaycastHit _resultFwd, length, hitLayer);
         if (_hitFwd)
         {
-            //Block _block = _resultFwd.collider.GetComponent<Block>();
-            //if (!_block)
-            //    return;
-            //_resultFwd.collider.GetComponent<Block>().Move(_resultFwd);
+            Debug.Log("ca touche");
+            Block _block = _resultFwd.collider.GetComponent<Block>();
+            if (!_block)
+                return;
+            _resultFwd.collider.GetComponent<Block>().Move(_resultFwd);
         }
     }
 }
