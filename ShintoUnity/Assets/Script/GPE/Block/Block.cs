@@ -9,26 +9,27 @@ public class Block : GPEComponent
     [SerializeField, Range(.1f, 100)] float speed = 1;
     [SerializeField] protected LayerMask layerMask;
 
-    protected bool canMove = false;
+    [SerializeField] protected bool canMove = false;
 
     void Update()
     {
         MoveTodestination();
     }
+    public virtual void Move(Vector3 _normal) { }
 
 
-    public virtual void Move(RaycastHit _hitInfo)
-    {
-        
-    }
-
-
-    void MoveTodestination()
+    protected virtual void MoveTodestination()
     {
         if (!canMove) return;
 
         transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
-        if (MathUtils.CompareVector(transform.position, destination, new Vector3(blockCollider.size.x * 1.1f, blockCollider.size.y * 1.1f, blockCollider.size.z * 1.1f)))
-            canMove = false;
     }
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawLine(transform.position, destination);
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawCube(destination, new Vector3(.1f, .1f, .1f));
+    }
+
 }

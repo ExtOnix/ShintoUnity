@@ -7,10 +7,8 @@ using UnityEngine.UIElements;
 
 public class Ichigo : MonoBehaviour
 {
-    public event Action<int> OnTakeDamages;
     [SerializeField] PlayerInputs controls = null;
     [SerializeField] SpringArm arm = null;
-    [SerializeField,Range(1,10)] int maxLife = 5;
 
     [SerializeField] ThrowComponent component = null;
 
@@ -20,9 +18,6 @@ public class Ichigo : MonoBehaviour
     [SerializeField] LayerMask hitLayer;
     [SerializeField,Range(1,10)] int length = 5;
 
-    int life = 10;
-    bool isDead = false;
-    bool inInvincibility = false;
 
     bool hasBomb = false;
     int currentIndex = 0;
@@ -41,11 +36,6 @@ public class Ichigo : MonoBehaviour
     private void Awake()
     {
         controls = new PlayerInputs();
-        OnTakeDamages += TakeDamages;
-    }
-    private void Start()
-    {
-        life = maxLife;
     }
 
     private void OnEnable()
@@ -117,22 +107,6 @@ public class Ichigo : MonoBehaviour
     }
     #endregion
 
-    void TakeDamages(int _damage)
-    {
-        if (isDead || inInvincibility)
-            return;
-        life -= _damage;
-        //onLifeChange.Broadcast(life);
-        //inInvincibility = true;
-        //onInvinsibilityStart.Broadcast();
-        if (life == 0)
-        {
-            isDead = true;
-            //onDie.Broadcast();
-            return;
-        }
-
-    }
 
     void KeepBomb()
     {
@@ -232,11 +206,10 @@ public class Ichigo : MonoBehaviour
         bool _hitFwd = Physics.Raycast(new Ray(transform.position, transform.forward), out RaycastHit _resultFwd, length, hitLayer);
         if (_hitFwd)
         {
-            Debug.Log("ca touche");
             Block _block = _resultFwd.collider.GetComponent<Block>();
             if (!_block)
                 return;
-            _resultFwd.collider.GetComponent<Block>().Move(_resultFwd);
+            _resultFwd.collider.GetComponent<Block>().Move(-(_resultFwd.normal));
         }
     }
 }
