@@ -22,12 +22,10 @@ public class ExplosionCollider : MonoBehaviour
     }
 
 
-    public void DrawCollider(Color _color)
+    public void DrawCollider(Color _color, Matrix4x4 _matrix, Vector3 _size)
     {
         Gizmos.color = _color;
-        Gizmos.matrix = transform.localToWorldMatrix;
-        Gizmos.DrawWireCube(Vector3.zero, boxCollider.size);
+        Gizmos.matrix = _matrix;
+        Gizmos.DrawWireCube(Vector3.zero, _size);
     }
-
-
 }

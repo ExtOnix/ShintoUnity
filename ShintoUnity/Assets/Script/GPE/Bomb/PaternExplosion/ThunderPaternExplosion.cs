@@ -9,7 +9,7 @@ public class ThunderPaternExplosion : PaternExplosion
     [SerializeField, Range(.1f, 100)] float width = 1;
     [SerializeField, Range(.1f, 100)] float height = 1;
 
-    [SerializeField] List<ExplosionCollider> colliders = null;
+    [SerializeField] List<ExplosionCollider> colliders = null; //Merci
 
 
     void Awake() => InitColliders();
@@ -44,7 +44,12 @@ public class ThunderPaternExplosion : PaternExplosion
 
     void OnDrawGizmos()
     {
-        for (int i = 0; i < colliders.Count; i++)
-            colliders[i].DrawCollider(Color.yellow);
+        //for (int i = 0, index = 0; i < 180; i += 180 / colliders.Count, index++)
+        //{
+        //    Quaternion _rotation = colliders[index].transform.rotation;
+        //    _rotation.eulerAngles += new Vector3(0, i, 0);
+        //    Matrix4x4 _matrix = new Matrix4x4(transform.position, _rotation,  colliders);
+        //    colliders[i]
+        //}
     }
 }

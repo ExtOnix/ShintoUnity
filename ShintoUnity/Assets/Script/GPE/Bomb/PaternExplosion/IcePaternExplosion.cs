@@ -23,8 +23,6 @@ public class IcePaternExplosion : PaternExplosion
     {
         
     }
-
-
     void OnDrawGizmos()
     {
         Gizmos.color = Color.cyan;
@@ -35,7 +33,9 @@ public class IcePaternExplosion : PaternExplosion
     {
         if (HasDoEffect || damagelist.Contains(other.gameObject)) 
             return;
-        Debug.Log(other.gameObject.name);
+        Bomb _bomb = other.GetComponent<Bomb>();
+        if (_bomb)
+            _bomb.StopTime(2, () => { Debug.Log("Time Restart"); });
         damagelist.Add(other.gameObject);
     }
 

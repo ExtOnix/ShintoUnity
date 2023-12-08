@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 449872567149565873}
   - component: {fileID: 3478595013540066270}
   - component: {fileID: 8642360290162072758}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WindBomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Timers;
 using UnityEditor;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ using UnityEngine;
 public class Bomb : GPEComponent
 {
     public event Action OnExplode = null;
+    public event Action OnTimeStopFinish = null;
 
     [SerializeField, Header("Physics")] Rigidbody body = null;
     [SerializeField] LayerMask bounceLayer;
@@ -18,14 +20,14 @@ public class Bomb : GPEComponent
     [SerializeField, Header("Identity")] string bombName = "Bomb";
 
     public string BombName => bombName;
-
+    public float ExplosionProgress => explodeTimer / explodeTime;
 
     float explodeTimer = 0;
     bool isActive = true;
     float percentageSpeed = 1;
 
     bool isLaunch = false;
-    bool bouncing = false;
+    //bool bouncing = false;
 
 
     public Quaternion PaternRotation => new Quaternion(0, transform.eulerAngles.y, 0, 0);
@@ -54,16 +56,11 @@ public class Bomb : GPEComponent
         UpdateTimer();
         UpdateBounce();
     }
-    void FixedUpdate()
-    {
-    }
 
     void OnTriggerEnter(Collider other)
     {
         
     }
-
-
 
     void UpdateTimer()
     {
@@ -83,16 +80,33 @@ public class Bomb : GPEComponent
         Destroy(gameObject);
     }
 
+    public void StopTime(float _time, Action _callBack)
+    {
+        isActive = false;
+        Timer _timer = new Timer();
+        _timer.Interval = _time * 1000f;
+        _timer.Elapsed += (s, e) =>
+        {
+            isActive = true;
+            _callBack?.Invoke();
+            _timer = null;
+        };
+        _timer.Start();
+    }
 
     void OnDrawGizmos()
     {
+        Gizmos.color = Color.Lerp(Color.green, Color.red, ExplosionProgress);
+        Gizmos.DrawSphere(transform.position + Vector3.up, .5f * (1 - ExplosionProgress));
+
+
+
         //Gizmos.color = Color.red;
         //Gizmos.DrawSphere((transform.position + new Vector3(0, -.1f, 0) * .1f), .5f);
         //Gizmos.color = Color.blue;
         //Vector3 _dir = transform.forward;
         //Gizmos.DrawLine(transform.position, transform.position + _dir * 10);
     }
-
     void UpdateBounce()
     {
         //if (bouncing)

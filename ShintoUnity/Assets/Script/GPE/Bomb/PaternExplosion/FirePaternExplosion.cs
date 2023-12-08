@@ -55,7 +55,7 @@ public class FirePaternExplosion : PaternExplosion
 
     void OnDrawGizmos()
     {
-        for (int i = 0; i < colliders.Count; i++)
-            colliders[i].DrawCollider(Color.red);
+        //for (int i = 0; i < colliders.Count; i++)
+        //    colliders[i].DrawCollider(Color.red);
     }
 }
