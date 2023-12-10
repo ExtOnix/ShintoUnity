@@ -1091,13 +1091,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockCollider: {fileID: 1989231616}
   destination: {x: 0, y: 0, z: 0}
-  speed: 1
-  layerMask:
+  moveSpeed: 3
+  fallSpeed: 10
+  moveLayer:
     serializedVersion: 2
     m_Bits: 2816
-  canMove: 0
-  isGrounded: 1
-  direction: {x: 0, y: 0, z: 0}
+  fallLayer:
+    serializedVersion: 2
+    m_Bits: 768
 --- !u!65 &1989231616
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1178,7 +1179,7 @@ Transform:
   m_GameObject: {fileID: 1989231613}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.25, y: 9.7, z: -0}
+  m_LocalPosition: {x: -0.25, y: 11.8, z: -0}
   m_LocalScale: {x: 1.5, y: 3, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1359,14 +1360,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockCollider: {fileID: 2074495323}
   destination: {x: 0, y: 1.63, z: 0}
-  speed: 3
-  layerMask:
+  moveSpeed: 3
+  fallSpeed: 10
+  moveLayer:
     serializedVersion: 2
     m_Bits: 2816
-  canMove: 0
-  isGrounded: 1
-  direction: {x: 0, y: 0, z: 0}
-  length: 1
+  fallLayer:
+    serializedVersion: 2
+    m_Bits: 768
+  length: 1.5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

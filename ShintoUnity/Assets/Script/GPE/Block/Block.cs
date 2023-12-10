@@ -7,21 +7,23 @@ public class Block : GPEComponent
 {
     [SerializeField] protected BoxCollider blockCollider = null;
     [SerializeField] protected Vector3 destination;
-    [SerializeField, Range(.1f, 100)] float speed = 1;
-    [SerializeField] protected LayerMask layerMask;
+    [SerializeField, Range(.1f, 100)] float moveSpeed = 1;
+    [SerializeField, Range(.1f, 100)] float fallSpeed = 1;
+    [SerializeField] protected LayerMask moveLayer;
+    [SerializeField] protected LayerMask fallLayer;
 
-    [SerializeField] protected bool canMove = false;
-    [SerializeField] protected bool isGrounded = true;
+    protected bool canMove = false;
+    protected bool isFalling = false;
+    
+    protected Vector3 direction;
+    
+    float currentTime = 0;
 
-    [SerializeField]  Vector3 direction;
-
-
-    //private void Start() => InvokeRepeating("IsGrounded", .1f, .1f);
 
     void Update()
     {
         MoveTodestination();
-        IsGrounded();
+        UpdateTimer();
     }
     public virtual void Move(Vector3 _normal)
     {
@@ -33,30 +35,20 @@ public class Block : GPEComponent
     {
         if (!canMove) return;
 
-        transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
-
-        if (MathUtils.CompareVector(transform.position, destination, new Vector3(blockCollider.bounds.extents.x * 1.01f, blockCollider.bounds.extents.y * 1.01f, blockCollider.bounds.extents.z * 1.01f)))
-        {
-            canMove = false;
-            if (isGrounded)
-                StopMove();
-            else RestartMovement();
-        }
-            
+        transform.position = Vector3.MoveTowards(transform.position, destination, (isFalling ? fallSpeed : moveSpeed) * Time.deltaTime);            
     }
 
 
     void IsGrounded()
     {
-        if (!isGrounded) return;
+        if (isFalling) return;
 
-        //bool _isGrounded = Physics.BoxCast(transform.position, blockCollider.bounds.extents, Vector3.down, out RaycastHit _floorResult, Quaternion.identity, .1f, layerMask);
-        bool _isGrounded = Physics.Raycast(transform.position, Vector3.down, out RaycastHit _floorResult, 1, layerMask);
-        if (!_isGrounded)
+        RaycastHit[] _hits = Physics.BoxCastAll(transform.position, blockCollider.bounds.extents, Vector3.down, Quaternion.identity, 2, fallLayer);
+        Debug.Log(_hits.Length);
+        if (_hits.Length == 0)
         {
-            isGrounded = _isGrounded;
-            CancelInvoke("IsGrounded");
-            bool _hit = Physics.BoxCast(transform.position, blockCollider.bounds.extents, Vector3.down, out RaycastHit _result, Quaternion.identity, 100, layerMask);
+            isFalling = true;
+            bool _hit = Physics.BoxCast(transform.position, blockCollider.bounds.extents, Vector3.down, out RaycastHit _result, Quaternion.identity, 100, moveLayer);
             if (_hit)
                 destination = MathUtils.ReplaceVectorElements(transform.position, _result.point, Vector3.down);
             else destination = transform.position + Vector3.down * 100;
@@ -72,8 +64,6 @@ public class Block : GPEComponent
     void RestartMovement()
     {
         Move(direction);
-        isGrounded = true;
-        //InvokeRepeating("IsGrounded", .001f, .001f);
     }
 
 
@@ -86,6 +76,19 @@ public class Block : GPEComponent
 
         Gizmos.color = Color.black;
         Gizmos.DrawCube(transform.position + Vector3.down * .1f, blockCollider.bounds.extents * 2);
+    }
+
+
+    void UpdateTimer()
+    {
+        if (isFalling) return;
+
+        currentTime += Time.deltaTime;
+        if (currentTime >= .1f)
+        {
+            currentTime = 0;
+            IsGrounded();
+        }
     }
 
 }

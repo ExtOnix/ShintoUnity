@@ -4,19 +4,32 @@ using UnityEngine;
 
 public class PushBlock : Block
 {
-    [SerializeField, Range(1, 100)] int length = 1;
-
+    [SerializeField, Header("Push")] float length = 1;
 
     public override void Move(Vector3 _normal)
     {
         if (canMove) return;
 
-        bool _hit = Physics.BoxCast(transform.position, blockCollider.bounds.extents, _normal, out RaycastHit _result, Quaternion.identity, length, layerMask);
+        bool _hit = Physics.BoxCast(transform.position, blockCollider.bounds.extents, _normal, out RaycastHit _result, Quaternion.identity, length, moveLayer);
         if (!_hit)
         {
             base.Move(_normal);
             destination = transform.position + _normal * length;
             canMove = true;
+        }
+    }
+
+
+    protected override void MoveTodestination()
+    {
+        base.MoveTodestination();
+        if (MathUtils.CompareVector(transform.position, destination, new Vector3(.001f,.001f,.001f)))
+        {
+            canMove = false;
+            if (isFalling)
+                Move(direction);
+            else StopMove();
+            isFalling = false;
         }
     }
 
