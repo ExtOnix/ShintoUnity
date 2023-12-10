@@ -10,21 +10,22 @@ public class PushBlock : Block
     public override void Move(Vector3 _normal)
     {
         if (canMove) return;
-        Vector3 _size = new Vector3(blockCollider.bounds.extents.x, .1f, blockCollider.bounds.extents.z);
-        bool _hit = Physics.BoxCast(transform.position, _size, _normal, out RaycastHit _result, Quaternion.identity, length, layerMask);
+
+        bool _hit = Physics.BoxCast(transform.position, blockCollider.bounds.extents, _normal, out RaycastHit _result, Quaternion.identity, length, layerMask);
         if (!_hit)
         {
+            base.Move(_normal);
             destination = transform.position + _normal * length;
             canMove = true;
         }
     }
 
 
-    protected override void MoveTodestination()
-    {
-        base.MoveTodestination();
-        if (MathUtils.CompareVector(transform.position, destination, new Vector3(.1f, .1f, .1f)))
-            canMove = false;
-    }
+    //protected override void MoveTodestination()
+    //{
+    //    base.MoveTodestination();
+    //    if (MathUtils.CompareVector(transform.position, destination, new Vector3(.1f, .1f, .1f)))
+    //        canMove = false;
+    //}
 
 }

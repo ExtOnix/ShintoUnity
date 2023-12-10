@@ -123,7 +123,7 @@ Rigidbody:
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 3840
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -150,7 +150,6 @@ MonoBehaviour:
   bounceLayer:
     serializedVersion: 2
     m_Bits: 768
-  force: {x: 0, y: 200, z: 100}
   patern: {fileID: 2420463599920299204, guid: 2a5b7c8b49b1eed468b3361762fd579e, type: 3}
   explodeTime: 2
   holdingBombExplodePercentage: 1
