@@ -89,6 +89,15 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Press"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RotatePlayer"",
+                    ""type"": ""Button"",
+                    ""id"": ""9c8a21ff-16da-4ae1-a2db-7c0be4150c16"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -234,6 +243,17 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""action"": ""ScrollDown"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""76ba1bc4-663d-41e9-abf3-af36f3289b39"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotatePlayer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -249,6 +269,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_Player_DropBomb = m_Player.FindAction("DropBomb", throwIfNotFound: true);
         m_Player_ScrollUp = m_Player.FindAction("ScrollUp", throwIfNotFound: true);
         m_Player_ScrollDown = m_Player.FindAction("ScrollDown", throwIfNotFound: true);
+        m_Player_RotatePlayer = m_Player.FindAction("RotatePlayer", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -317,6 +338,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_DropBomb;
     private readonly InputAction m_Player_ScrollUp;
     private readonly InputAction m_Player_ScrollDown;
+    private readonly InputAction m_Player_RotatePlayer;
     public struct PlayerActions
     {
         private @PlayerInputs m_Wrapper;
@@ -328,6 +350,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         public InputAction @DropBomb => m_Wrapper.m_Player_DropBomb;
         public InputAction @ScrollUp => m_Wrapper.m_Player_ScrollUp;
         public InputAction @ScrollDown => m_Wrapper.m_Player_ScrollDown;
+        public InputAction @RotatePlayer => m_Wrapper.m_Player_RotatePlayer;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -358,6 +381,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @ScrollDown.started += instance.OnScrollDown;
             @ScrollDown.performed += instance.OnScrollDown;
             @ScrollDown.canceled += instance.OnScrollDown;
+            @RotatePlayer.started += instance.OnRotatePlayer;
+            @RotatePlayer.performed += instance.OnRotatePlayer;
+            @RotatePlayer.canceled += instance.OnRotatePlayer;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -383,6 +409,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @ScrollDown.started -= instance.OnScrollDown;
             @ScrollDown.performed -= instance.OnScrollDown;
             @ScrollDown.canceled -= instance.OnScrollDown;
+            @RotatePlayer.started -= instance.OnRotatePlayer;
+            @RotatePlayer.performed -= instance.OnRotatePlayer;
+            @RotatePlayer.canceled -= instance.OnRotatePlayer;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -409,5 +438,6 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         void OnDropBomb(InputAction.CallbackContext context);
         void OnScrollUp(InputAction.CallbackContext context);
         void OnScrollDown(InputAction.CallbackContext context);
+        void OnRotatePlayer(InputAction.CallbackContext context);
     }
 }

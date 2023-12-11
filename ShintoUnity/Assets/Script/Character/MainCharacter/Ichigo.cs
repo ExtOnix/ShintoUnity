@@ -4,6 +4,7 @@ using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
+using UnityEngine.Windows;
 
 [RequireComponent(typeof(LifeComponent), typeof(ThrowComponent))]
 public class Ichigo : MonoBehaviour
@@ -19,6 +20,8 @@ public class Ichigo : MonoBehaviour
     [SerializeField] LayerMask hitLayer;
     [SerializeField,Range(1,10)] int length = 5;
 
+    bool isWalkingForward = false;
+
 
     bool hasBomb = false;
     int currentIndex = 0;
@@ -32,6 +35,7 @@ public class Ichigo : MonoBehaviour
     [SerializeField,HideInInspector] InputAction dropBomb = null;
     [SerializeField,HideInInspector] InputAction scrollUp = null;
     [SerializeField,HideInInspector] InputAction scrollDown = null;
+    [SerializeField,HideInInspector] InputAction rotatePlayer = null;
     #endregion
 
     private void Awake()
@@ -55,12 +59,15 @@ public class Ichigo : MonoBehaviour
         scrollUp.Enable();
         scrollDown = controls.Player.ScrollDown;
         scrollDown.Enable();
+        rotatePlayer = controls.Player.RotatePlayer;
+        rotatePlayer.Enable();
 
         shootBomb.performed += ShootBomb;
         throwBomb.performed += ThrowBomb;
         dropBomb .performed += DropBomb;
         scrollDown.performed += ScrollDown;
         scrollUp.performed += ScrollUp;
+       rotatePlayer.performed += WalkingForward;
     }
     private void OnDrawGizmos()
     {
@@ -78,6 +85,7 @@ public class Ichigo : MonoBehaviour
     {
         Move();
         DetectObject();
+        SetPlayerRotationWithSpringArmRotation();
 
         if (!hasBomb)
             return;
@@ -96,24 +104,27 @@ public class Ichigo : MonoBehaviour
     void Move()
     {
         Vector3 _movementDirection = move.ReadValue<Vector3>();
-        if (_movementDirection.z > 0)
-        {
-            //transform.rotation = new Quaternion(transform.rotation.x, arm.AttachedCamera.transform.rotation.y, transform.rotation.z, transform.rotation.w);
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, arm.AttachedCamera.transform.eulerAngles.y, transform.eulerAngles.z);
-            arm.Angle = 0;
-            arm.UpdateCameraPosition();
-        }
-
         transform.position += transform.forward * 5f * Time.deltaTime * _movementDirection.z;
         transform.position += transform.right * 5f * Time.deltaTime * _movementDirection.x;
 
     }
+    void SetPlayerRotationWithSpringArmRotation()
+    {
+        if (!isWalkingForward) return;
+        Vector3 _rot = arm.transform.eulerAngles;
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, _rot.y, transform.eulerAngles.z);
+        arm.transform.localEulerAngles = new Vector3(_rot.x, 0, _rot.z);
+    }
+
+    void WalkingForward(InputAction.CallbackContext _context)
+    {
+        isWalkingForward = _context.ReadValueAsButton();
+    }
 
     void Rotate()
     {
-        float _rotValue = rotate.ReadValue<float>();
-        arm.Angle += _rotValue;
-        arm.UpdateCameraPosition();
+        float _axis = controls.Player.Rotate.ReadValue<float>();
+        arm.transform.localEulerAngles += new Vector3(0, _axis, 0);
     }
     #endregion
 
