@@ -19,6 +19,10 @@ public class Block : GPEComponent
     
     float currentTime = 0;
 
+    private void Start()
+    {
+        destination = transform.position;
+    }
 
     void Update()
     {
@@ -44,7 +48,6 @@ public class Block : GPEComponent
         if (isFalling) return;
 
         RaycastHit[] _hits = Physics.BoxCastAll(transform.position, blockCollider.bounds.extents, Vector3.down, Quaternion.identity, 2, fallLayer);
-        Debug.Log(_hits.Length);
         if (_hits.Length == 0)
         {
             isFalling = true;

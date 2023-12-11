@@ -32,6 +32,11 @@ public class Player : MonoBehaviour
         Vector3 _axis = inputs.Move.ReadValue<Vector3>();
         transform.position += transform.forward * 5 * Time.deltaTime * _axis.z;
         transform.position += transform.right * 5 * Time.deltaTime * _axis.x;
+
+        float _z = Mathf.Sin(_axis.z);
+        float _x = Mathf.Sin(_axis.x);
+        Debug.Log(_x + " " + _z);
+
     }
 
     void Rotate()

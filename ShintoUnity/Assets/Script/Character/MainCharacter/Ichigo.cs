@@ -25,10 +25,12 @@ public class Ichigo : MonoBehaviour
 
     bool isWalkingForward = false;
 
-
+    bool canMove = true;
     bool hasBomb = false;
     int currentIndex = 0;
 
+
+    public bool CanMove { get => canMove; set => canMove = value; }
     public SpringArm Arm { get { return arm; } set { arm = value; } }
 
 
@@ -77,7 +79,7 @@ public class Ichigo : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue; 
-        Ray _r = new Ray(transform.position + (transform.forward/2) + transform.up, transform.forward);
+        Ray _r = new Ray(transform.position + (mesh.transform.forward/2) + mesh.transform.up, mesh.transform.forward);
         Gizmos.DrawRay(_r);
         Gizmos.color = Color.white;
     }
@@ -108,6 +110,7 @@ public class Ichigo : MonoBehaviour
     #region Movements
     void Move()
     {
+        if (!canMove) return;
         Vector3 _movementDirection = move.ReadValue<Vector3>();
         // transform.position += transform.forward * 5f * Time.deltaTime * _movementDirection.z;
         // transform.position += transform.right * 5f * Time.deltaTime * _movementDirection.x;
@@ -191,7 +194,7 @@ public class Ichigo : MonoBehaviour
                 Bomb _bomb = component.CurrentBomb;
                 if (!component || !_bomb)
                     return;
-                component.Throw(transform.forward,Vector3.zero);
+                component.Throw(mesh.transform.forward,Vector3.zero);
                 component.CurrentBomb.OnExplode -= SetHasBomb;
                 hasBomb = false;
                 //onBombSpawn.Broadcast(false);
@@ -204,7 +207,7 @@ public class Ichigo : MonoBehaviour
             {
                 if (!component || !_bomb)
                     return;
-                component.Throw(transform.forward, transform.up);
+                component.Throw(mesh.transform.forward, mesh.transform.up);
                 component.CurrentBomb.OnExplode -= SetHasBomb;
                 hasBomb = false;
                 //onBombSpawn.Broadcast(false);
