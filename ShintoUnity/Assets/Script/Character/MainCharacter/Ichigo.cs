@@ -26,6 +26,8 @@ public class Ichigo : MonoBehaviour
     bool hasBomb = false;
     int currentIndex = 0;
 
+    public SpringArm Arm { get { return arm; } set { arm = value; } }
+
 
     #region inputs
     [SerializeField,HideInInspector] InputAction move = null;

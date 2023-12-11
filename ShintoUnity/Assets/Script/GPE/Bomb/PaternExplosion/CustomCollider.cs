@@ -19,10 +19,12 @@ public class CustomCollider : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        if (!other.GetComponent<Ichigo>()) return;
         onTriggerEnter?.Invoke(other);
     }
     void OnTriggerExit(Collider other)
     {
+        if (!other.GetComponent<Ichigo>()) return;
         onTriggerExit?.Invoke(other);
     }
 

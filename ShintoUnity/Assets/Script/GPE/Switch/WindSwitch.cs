@@ -20,14 +20,14 @@ public class WindSwitch : Switch
 
     bool Active()
     {
-        //foreach (AlimentableElement _element in elements)
-        //    _element.Active();
+        foreach (AlimentableElement _element in elements)
+            _element.Active();
         return true;
     }
     bool Disable()
     {
-        //foreach (AlimentableElement _element in elements)
-        //    _element.Disable();
+        foreach (AlimentableElement _element in elements)
+            _element.Disable();
         return false;
     }
 

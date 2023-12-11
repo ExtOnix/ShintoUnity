@@ -11,13 +11,17 @@ public class IcedPlateform : Platform
     {
         OnActive += Freeze;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.GetComponent<IcePaternExplosion>())
+            Active();
+    }
     void Freeze()
     {
         InvokeRepeating("Melt", time, time);
         gameObject.layer = LayerMask.NameToLayer("Wall");
         gameObject.GetComponent<Renderer>().material = freezeMaterial;
-
-
     }
 
     void Melt()
