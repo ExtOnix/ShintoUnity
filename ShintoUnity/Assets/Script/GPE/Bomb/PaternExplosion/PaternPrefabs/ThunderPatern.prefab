@@ -67,6 +67,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boxCollider: {fileID: 4766107914231534961}
+  patern: {fileID: 5443239255784630683}
 --- !u!1 &3970877674215374029
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,6 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boxCollider: {fileID: 4824997573186325949}
+  patern: {fileID: 5443239255784630683}
 --- !u!1 &4377434556338591282
 GameObject:
   m_ObjectHideFlags: 0
@@ -201,6 +203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boxCollider: {fileID: 2374174484119630967}
+  patern: {fileID: 5443239255784630683}
 --- !u!1 &5756932332671880784
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,6 +271,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boxCollider: {fileID: 2414620259444065019}
+  patern: {fileID: 5443239255784630683}
 --- !u!1 &7966874187731552608
 GameObject:
   m_ObjectHideFlags: 0
@@ -316,6 +320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6969481e494456498ff833d27aaeebd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  paternName: Thunder
   damage: 1
   playerDamage: 1
   duration: 3

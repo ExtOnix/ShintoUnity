@@ -66,6 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5276481f0fa0b8345acd238377e14d0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  paternName: Wind
   damage: 0
   playerDamage: 0
   duration: 3

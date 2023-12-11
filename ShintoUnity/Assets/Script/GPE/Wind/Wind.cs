@@ -7,7 +7,6 @@ public class Wind : GPEComponent
 {
     public event Action OnDisapear = null;
 
-    [SerializeField] Vector3 direction;
     [SerializeField, Range(0, 100)] float speed = 10;
     [SerializeField] float offset = 1;
     [SerializeField] LayerMask wallLayer;
@@ -49,6 +48,8 @@ public class Wind : GPEComponent
     void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.gameObject.name);
+        if (!other.gameObject.GetComponent<Ichigo>()) return;
+
         WindFollower _follower = other.gameObject.GetComponent<WindFollower>();
 
         if (!_follower)

@@ -66,6 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae0f2ecaa9ebb2940b7a154216aaad3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  paternName: Ice
   damage: 2
   playerDamage: 1
   duration: 3

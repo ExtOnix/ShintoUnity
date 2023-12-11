@@ -11,6 +11,7 @@ public class ThunderPaternExplosion : PaternExplosion
 
     [SerializeField] List<ExplosionCollider> colliders = null; //Merci
 
+    
 
     void Awake() => InitColliders();
 

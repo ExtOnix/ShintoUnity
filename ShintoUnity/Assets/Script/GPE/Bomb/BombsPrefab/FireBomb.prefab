@@ -65,7 +65,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6624530189540142264}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 50
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -100,7 +100,6 @@ MonoBehaviour:
   bounceLayer:
     serializedVersion: 2
     m_Bits: 768
-  force: {x: 0, y: 0.6, z: 0.2}
   patern: {fileID: 5520663182727297683, guid: c846752a6ad54fb41b923246da81f2dd, type: 3}
   explodeTime: 2
   holdingBombExplodePercentage: 1

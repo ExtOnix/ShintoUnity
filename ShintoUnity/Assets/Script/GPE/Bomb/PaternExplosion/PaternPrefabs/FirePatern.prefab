@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 468e6ab2b190b4142aa4d36215a88514, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  paternName: Fire
   damage: 3
   playerDamage: 1
   duration: 3
@@ -123,6 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boxCollider: {fileID: 2820060258893654186}
+  patern: {fileID: 5520663182727297683}
 --- !u!1 &7909389714264787507
 GameObject:
   m_ObjectHideFlags: 0
@@ -190,3 +192,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boxCollider: {fileID: 4003262128888141154}
+  patern: {fileID: 5520663182727297683}

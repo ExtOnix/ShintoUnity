@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
@@ -9,6 +10,9 @@ public class ExplosionCollider : MonoBehaviour
     public event Action<Collider> onTriggerEnter = null;
 
     [SerializeField] BoxCollider boxCollider = null;
+    [SerializeField] PaternExplosion patern = null;
+
+    public PaternExplosion Patern => patern;
 
     public Vector3 Size
     {
