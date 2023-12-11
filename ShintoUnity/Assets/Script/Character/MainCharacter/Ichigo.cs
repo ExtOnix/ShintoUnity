@@ -65,7 +65,7 @@ public class Ichigo : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue; 
-        Ray _r = new Ray(transform.position + (Vector3.forward/2), transform.forward);
+        Ray _r = new Ray(transform.position + (Vector3.forward/2) + Vector3.up, transform.forward);
         Gizmos.DrawRay(_r);
         Gizmos.color = Color.white;
     }
@@ -77,7 +77,6 @@ public class Ichigo : MonoBehaviour
     private void Update()
     {
         Move();
-        Rotate();
         DetectObject();
 
         if (!hasBomb)
@@ -85,7 +84,10 @@ public class Ichigo : MonoBehaviour
         KeepBomb();
     }
 
-
+    void LateUpdate()
+    {
+        Rotate();
+    }
     void SetHasBomb()
     {
         hasBomb = false;
@@ -94,6 +96,14 @@ public class Ichigo : MonoBehaviour
     void Move()
     {
         Vector3 _movementDirection = move.ReadValue<Vector3>();
+        if (_movementDirection.z > 0)
+        {
+            //transform.rotation = new Quaternion(transform.rotation.x, arm.AttachedCamera.transform.rotation.y, transform.rotation.z, transform.rotation.w);
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, arm.AttachedCamera.transform.eulerAngles.y, transform.eulerAngles.z);
+            arm.Angle = 0;
+            arm.UpdateCameraPosition();
+        }
+
         transform.position += transform.forward * 5f * Time.deltaTime * _movementDirection.z;
         transform.position += transform.right * 5f * Time.deltaTime * _movementDirection.x;
 
@@ -103,6 +113,7 @@ public class Ichigo : MonoBehaviour
     {
         float _rotValue = rotate.ReadValue<float>();
         arm.Angle += _rotValue;
+        arm.UpdateCameraPosition();
     }
     #endregion
 

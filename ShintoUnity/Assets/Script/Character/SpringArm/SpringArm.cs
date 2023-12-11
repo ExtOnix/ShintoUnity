@@ -22,7 +22,7 @@ public class SpringArm : MonoBehaviour
     {
         if (!attachedCamera)
             return;
-        UpdateCameraPosition();
+        //UpdateCameraPosition();
     }
     void Init()
     {
@@ -37,7 +37,7 @@ public class SpringArm : MonoBehaviour
         Gizmos.color = Color.red;
     }
 
-    private void UpdateCameraPosition()
+    public void UpdateCameraPosition()
     {
         float _rad = angle * Mathf.Deg2Rad;
         attachedCamera.transform.position = transform.position + new Vector3(Mathf.Cos(_rad) * length, height, Mathf.Sin(_rad) * length);

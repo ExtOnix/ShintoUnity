@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5615575361098101934}
   - component: {fileID: 2748691054016063069}
   - component: {fileID: 9164500663225736632}
+  - component: {fileID: 4180527804012350141}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -118,7 +119,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arm: {fileID: 2638181580710528984}
-  maxLife: 5
   component: {fileID: 9164500663225736632}
   inventory:
   - {fileID: 302927157120114174, guid: e27e9e4f536040847a76e618016f4832, type: 3}
@@ -128,7 +128,7 @@ MonoBehaviour:
   currentBomb: {fileID: 0}
   hitLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2048
   length: 5
   move:
     m_Name: 
@@ -260,6 +260,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forwardSpeed: 600
   upSpeed: 300
+--- !u!114 &4180527804012350141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2667933451683214740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b26245e169a3b8644a3dc8d5329d7854, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxLife: 5
 --- !u!1 &3843703987722719210
 GameObject:
   m_ObjectHideFlags: 0
