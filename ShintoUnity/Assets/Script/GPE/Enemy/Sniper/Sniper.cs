@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -40,7 +41,7 @@ public class Sniper : Enemy
 
     void UpdateSniperRotation(Collider _chara)
     {
-        transform.LookAt(_chara.transform.position);
+        transform.eulerAngles = MathUtils.ReplaceVectorElements(transform.eulerAngles, Quaternion.LookRotation(_chara.transform.position - transform.position).eulerAngles, new Vector3(0,1,0));
     }
 
     void UpdateDetection(bool _status)

@@ -23,6 +23,18 @@ public class PushBlock : Block
     protected override void MoveTodestination()
     {
         base.MoveTodestination();
+        if ( isFalling)
+        {
+            if (MathUtils.CompareVector(transform.position, destination, new Vector3(blockCollider.bounds.extents.x * 1.01f, blockCollider.bounds.extents.y * 1.01f, blockCollider.bounds.extents.z * 1.01f)))
+            {
+                canMove = false;
+                if (isFalling)
+                    Move(direction);
+                else StopMove();
+                isFalling = false;
+            }
+            return;
+        }
         if (MathUtils.CompareVector(transform.position, destination, new Vector3(.001f,.001f,.001f)))
         {
             canMove = false;

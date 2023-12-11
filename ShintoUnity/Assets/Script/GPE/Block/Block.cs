@@ -35,7 +35,7 @@ public class Block : GPEComponent
     {
         if (!canMove) return;
 
-        transform.position = Vector3.MoveTowards(transform.position, destination, (isFalling ? fallSpeed : moveSpeed) * Time.deltaTime);            
+        transform.position = Vector3.MoveTowards(transform.position, destination, (isFalling ? fallSpeed : moveSpeed) * Time.deltaTime);
     }
 
 

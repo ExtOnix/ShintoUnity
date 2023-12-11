@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
+using UnityEngine.Diagnostics;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 using UnityEngine.Windows;
@@ -11,6 +12,8 @@ public class Ichigo : MonoBehaviour
 {
     [SerializeField] PlayerInputs controls = null;
     [SerializeField] SpringArm arm = null;
+    [SerializeField] CharacterController controller = null;
+    [SerializeField] MeshRenderer mesh = null;
 
     [SerializeField] ThrowComponent component = null;
 
@@ -74,7 +77,7 @@ public class Ichigo : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue; 
-        Ray _r = new Ray(transform.position + (Vector3.forward/2) + Vector3.up, transform.forward);
+        Ray _r = new Ray(transform.position + (transform.forward/2) + transform.up, transform.forward);
         Gizmos.DrawRay(_r);
         Gizmos.color = Color.white;
     }
@@ -106,9 +109,19 @@ public class Ichigo : MonoBehaviour
     void Move()
     {
         Vector3 _movementDirection = move.ReadValue<Vector3>();
-        transform.position += transform.forward * 5f * Time.deltaTime * _movementDirection.z;
-        transform.position += transform.right * 5f * Time.deltaTime * _movementDirection.x;
+        // transform.position += transform.forward * 5f * Time.deltaTime * _movementDirection.z;
+        // transform.position += transform.right * 5f * Time.deltaTime * _movementDirection.x;
+        if (_movementDirection.z < 0)
+            mesh.transform.localEulerAngles = new Vector3(0, 180, 0);
+        else if (_movementDirection.z > 0)
+            mesh.transform.localEulerAngles = new Vector3(0, 0, 0);
+        else if (_movementDirection.x > 0)
+            mesh.transform.localEulerAngles = new Vector3(0, 90, 0);
+        else if (_movementDirection.x < 0)
+            mesh.transform.localEulerAngles = new Vector3(0, -90, 0);
 
+        Vector3 _movement = transform.forward * _movementDirection.z + transform.right * _movementDirection.x;
+        controller.SimpleMove(_movement * 10);
     }
     void SetPlayerRotationWithSpringArmRotation()
     {

@@ -20,16 +20,19 @@ public class EnemyCustomCollider : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        onTriggerEnter?.Invoke(other);
+        if (other.GetComponent<Ichigo>())
+            onTriggerEnter?.Invoke(other);
     }
     void OnTriggerExit(Collider other)
     {
-        onTriggerExit?.Invoke(other);
+        if (other.GetComponent<Ichigo>())
+            onTriggerExit?.Invoke(other);
     }
 
     private void OnTriggerStay(Collider other)
     {
-        onTriggerStay.Invoke(other);
+        if (other.GetComponent<Ichigo>())
+            onTriggerStay.Invoke(other);
     }
 
     public void DrawCollider(Color _color, float _radius)
