@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2149419025953571433
+--- !u!1 &2220212986797757873
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4736168034855607682}
-  - component: {fileID: 4423340830194482755}
-  - component: {fileID: 643650976072775029}
-  - component: {fileID: 2812360807354825413}
-  - component: {fileID: 9123409529120351527}
+  - component: {fileID: 3625940166724849230}
+  - component: {fileID: 4531802260292820949}
+  - component: {fileID: 1195420055323154070}
+  - component: {fileID: 8430849505301492726}
+  - component: {fileID: 8725094628374684740}
   m_Layer: 12
-  m_Name: IcedPlateform
+  m_Name: FadingPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4736168034855607682
+--- !u!4 &3625940166724849230
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2149419025953571433}
+  m_GameObject: {fileID: 2220212986797757873}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.669395, y: 1.81, z: -0.78998375}
-  m_LocalScale: {x: 8.46265, y: 1, z: 7.5381}
+  m_LocalPosition: {x: -7.2915974, y: 1.09, z: -16.57}
+  m_LocalScale: {x: 8.4745, y: 1, z: 8.3586}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &4423340830194482755
+--- !u!33 &4531802260292820949
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2149419025953571433}
+  m_GameObject: {fileID: 2220212986797757873}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &643650976072775029
+--- !u!23 &1195420055323154070
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2149419025953571433}
+  m_GameObject: {fileID: 2220212986797757873}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: dfeeec3eb3382ef40bd66031d558ac4a, type: 2}
+  - {fileID: 2100000, guid: 5430b7a96bd951742889faa249787fc0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -85,13 +85,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2812360807354825413
+--- !u!65 &8430849505301492726
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2149419025953571433}
+  m_GameObject: {fileID: 2220212986797757873}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -106,18 +106,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &9123409529120351527
+--- !u!114 &8725094628374684740
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2149419025953571433}
+  m_GameObject: {fileID: 2220212986797757873}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c648683a2c8ac14d8292d1a8be72492, type: 3}
+  m_Script: {fileID: 11500000, guid: 30c57fd9f1a6d7b44b6df8b4d1baa579, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 2
-  initMaterial: {fileID: 2100000, guid: dfeeec3eb3382ef40bd66031d558ac4a, type: 2}
-  freezeMaterial: {fileID: 2100000, guid: d662d4ba877b20c40afba88665ed9113, type: 2}
+  canAppear: 0
+  initMaterial: {fileID: 2100000, guid: 5430b7a96bd951742889faa249787fc0, type: 2}
+  fadeMaterial: {fileID: 2100000, guid: e415fa34aa964c54c951c155da10d05f, type: 2}

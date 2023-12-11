@@ -94,8 +94,6 @@ public class Ichigo : MonoBehaviour
     void Move()
     {
         Vector3 _movementDirection = move.ReadValue<Vector3>();
-        if(_movementDirection.z > 0)
-            transform.rotation = new Quaternion(transform.rotation.x,arm.AttachedCamera.transform.rotation.y,transform.rotation.z, transform.rotation.w);
         transform.position += transform.forward * 5f * Time.deltaTime * _movementDirection.z;
         transform.position += transform.right * 5f * Time.deltaTime * _movementDirection.x;
 

@@ -14,12 +14,12 @@ public class AlimentableElement : MonoBehaviour
     {
     }
 
-    virtual protected void Active()
+    virtual public void Active()
     {
         OnActive.Invoke();
     }
 
-    virtual protected void Disable()
+    virtual public void Disable()
     {
         OnDisable.Invoke();
 
