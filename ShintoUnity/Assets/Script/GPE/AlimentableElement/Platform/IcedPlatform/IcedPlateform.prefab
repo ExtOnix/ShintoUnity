@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: dfeeec3eb3382ef40bd66031d558ac4a, type: 2}
+  - {fileID: 2100000, guid: ef67efe1a67a6034bba1e9ca07290aa8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   time: 5
-  initMaterial: {fileID: 2100000, guid: dfeeec3eb3382ef40bd66031d558ac4a, type: 2}
+  initMaterial: {fileID: 2100000, guid: ef67efe1a67a6034bba1e9ca07290aa8, type: 2}
   freezeMaterial: {fileID: 2100000, guid: d662d4ba877b20c40afba88665ed9113, type: 2}
 --- !u!54 &1252729267944185785
 Rigidbody:

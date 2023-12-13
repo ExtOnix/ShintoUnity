@@ -10,6 +10,11 @@ using UnityEngine.Windows;
 [RequireComponent(typeof(LifeComponent), typeof(ThrowComponent))]
 public class Ichigo : MonoBehaviour
 {
+    public event Action<float> OnMove;
+    public event Action<bool> OnShoot;
+    public event Action<bool> OnThrow;
+    public event Action<bool> OnDrop;
+
     [SerializeField] PlayerInputs controls = null;
     [SerializeField] SpringArm arm = null;
     [SerializeField] CharacterController controller = null;
@@ -32,6 +37,8 @@ public class Ichigo : MonoBehaviour
 
     public bool CanMove { get => canMove; set => canMove = value; }
     public SpringArm Arm { get { return arm; } set { arm = value; } }
+
+    public bool HasBomb { get { return hasBomb; } }
 
 
     #region inputs
@@ -78,12 +85,22 @@ public class Ichigo : MonoBehaviour
     }
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.blue; 
-        Ray _r = new Ray(transform.position + (mesh.transform.forward/2) + mesh.transform.up, mesh.transform.forward);
+        Gizmos.color = Color.blue;
+        Ray _r = new Ray(transform.position + transform.up, mesh.transform.forward);
         Gizmos.DrawRay(_r);
         Gizmos.color = Color.white;
     }
     private void OnDisable()
+    {
+        DisableMovements();
+    }
+
+    void EnableMovements()
+    {
+        rotate.Enable();
+        move.Enable();
+    }
+    void DisableMovements()
     {
         rotate.Disable();
         move.Disable();
@@ -110,10 +127,30 @@ public class Ichigo : MonoBehaviour
     #region Movements
     void Move()
     {
-        if (!canMove) return;
         Vector3 _movementDirection = move.ReadValue<Vector3>();
-        // transform.position += transform.forward * 5f * Time.deltaTime * _movementDirection.z;
-        // transform.position += transform.right * 5f * Time.deltaTime * _movementDirection.x;
+        OnMove.Invoke(_movementDirection.x);
+        OnMove.Invoke(_movementDirection.z);
+        RotateMesh(_movementDirection);
+        if (!canMove)
+            MoveWithoutGravity(_movementDirection);
+        MoveWithGravity(_movementDirection);
+    }
+
+    void MoveWithGravity(Vector3 _movementDirection)
+    {
+        Vector3 _movement = transform.forward * _movementDirection.z + transform.right * _movementDirection.x;
+        controller.SimpleMove(_movement * 10);
+    }
+
+    void MoveWithoutGravity(Vector3 _movementDirection)
+    {
+        transform.position += transform.forward * 5f * Time.deltaTime * _movementDirection.z;
+        transform.position += transform.right * 5f * Time.deltaTime * _movementDirection.x;
+        return;
+    }
+
+    void RotateMesh(Vector3 _movementDirection)
+    {
         if (_movementDirection.z < 0)
             mesh.transform.localEulerAngles = new Vector3(0, 180, 0);
         else if (_movementDirection.z > 0)
@@ -122,10 +159,8 @@ public class Ichigo : MonoBehaviour
             mesh.transform.localEulerAngles = new Vector3(0, 90, 0);
         else if (_movementDirection.x < 0)
             mesh.transform.localEulerAngles = new Vector3(0, -90, 0);
-
-        Vector3 _movement = transform.forward * _movementDirection.z + transform.right * _movementDirection.x;
-        controller.SimpleMove(_movement * 10);
     }
+
     void SetPlayerRotationWithSpringArmRotation()
     {
         if (!isWalkingForward) return;
@@ -166,16 +201,24 @@ public class Ichigo : MonoBehaviour
         hasBomb = true;
         component.CurrentBomb.OnExplode += SetHasBomb;
     }
-
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("collision");
+     
+    }
     void DropBomb(InputAction.CallbackContext _context)
     {
         if (!hasBomb) return;
+        DisableMovements();
+        OnDrop.Invoke(true);
         Bomb _bomb = component.CurrentBomb;
         if (!component || !_bomb)
             return;
         component.Throw(Vector3.zero, Vector3.zero);
         component.CurrentBomb.OnExplode -= SetHasBomb;
         hasBomb = false;
+        EnableMovements();
+        OnDrop.Invoke(false);
         //onBombSpawn.Broadcast(false);
     }
 
@@ -191,6 +234,8 @@ public class Ichigo : MonoBehaviour
             }
             else if (hasBomb)
             {
+            OnShoot.Invoke(true);
+                DisableMovements();
                 Bomb _bomb = component.CurrentBomb;
                 if (!component || !_bomb)
                     return;
@@ -198,20 +243,26 @@ public class Ichigo : MonoBehaviour
                 component.CurrentBomb.OnExplode -= SetHasBomb;
                 hasBomb = false;
                 //onBombSpawn.Broadcast(false);
+                EnableMovements() ;
+                OnShoot.Invoke(false);
             }
     }
     void ThrowBomb(InputAction.CallbackContext _context)
+    {
+        Bomb _bomb = component.CurrentBomb;
+        if (hasBomb)
         {
-            Bomb _bomb = component.CurrentBomb;
-            if (hasBomb)
-            {
-                if (!component || !_bomb)
-                    return;
-                component.Throw(mesh.transform.forward, mesh.transform.up);
-                component.CurrentBomb.OnExplode -= SetHasBomb;
-                hasBomb = false;
-                //onBombSpawn.Broadcast(false);
-            }
+            OnThrow.Invoke(true);
+            DisableMovements();
+            if (!component || !_bomb)
+                return;
+            component.Throw(mesh.transform.forward, mesh.transform.up);
+            component.CurrentBomb.OnExplode -= SetHasBomb;
+            hasBomb = false;
+        //onBombSpawn.Broadcast(false);
+            EnableMovements();
+            OnThrow.Invoke(false );
+        }
     }
 
     void ScrollUp(InputAction.CallbackContext _context)
@@ -242,9 +293,10 @@ public class Ichigo : MonoBehaviour
 
     void DetectObject()
     {
-        bool _hitFwd = Physics.Raycast(new Ray(transform.position, transform.forward), out RaycastHit _resultFwd, length, hitLayer);
+        bool _hitFwd = Physics.Raycast(new Ray(transform.position + transform.up, mesh.transform.forward), out RaycastHit _resultFwd, length, hitLayer);
         if (_hitFwd)
         {
+            Debug.Log("bonjour");
             Block _block = _resultFwd.collider.GetComponent<Block>();
             if (!_block)
                 return;

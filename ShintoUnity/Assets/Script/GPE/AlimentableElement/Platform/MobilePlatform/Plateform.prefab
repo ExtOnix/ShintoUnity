@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7276981457778750334}
   - component: {fileID: 2235547291303342730}
   - component: {fileID: 5515219739878764429}
+  - component: {fileID: 1091789928212005005}
   m_Layer: 9
   m_Name: Plateform
   m_TagString: Untagged
@@ -30,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.7, y: 2.38, z: 0}
-  m_LocalScale: {x: 5.5228205, y: 0.54022986, z: 5.7531676}
+  m_LocalScale: {x: 2.264025, y: 0.54022986, z: 2.4115553}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -63,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: -876546973899608171, guid: 1a207e3bee00db44b940e6f362a8e148, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -118,8 +119,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e54dfee2213e864d91e2b2cf47c9af4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isActive: 0
   pointB: {fileID: 0}
-  speed: 5
+  speed: 1
   canMove: 0
-  canGoBack: 0
+--- !u!65 &1091789928212005005
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3270468744311277222}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 2.5, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}

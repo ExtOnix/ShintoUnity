@@ -34,8 +34,5 @@ public class PressurePlate : GPEComponent
     }
 
 
-    void OnDrawGizmos()
-    {
-        customCollider.DrawCollider(Color.green, customCollider.Size);
-    }
+
 }

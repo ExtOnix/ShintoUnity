@@ -126,7 +126,7 @@ MonoBehaviour:
   wallLayer:
     serializedVersion: 2
     m_Bits: 512
-  lifeSpan: 5
+  lifeSpan: 8
 --- !u!54 &7897649351377845305
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -10,6 +10,7 @@ public class CustomCollider : MonoBehaviour
     public event Action<Collider> onTriggerExit = null;
 
     [SerializeField] protected BoxCollider boxCollider = null;
+    [SerializeField] LayerMask activeLayer;
 
     public Vector3 Size
     {
@@ -19,15 +20,14 @@ public class CustomCollider : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (!other.GetComponent<Ichigo>()) return;
-        onTriggerEnter?.Invoke(other);
+        if (other.GetComponent<Ichigo>() || other.GetComponent<PushBlock>())
+            onTriggerEnter?.Invoke(other);
     }
     void OnTriggerExit(Collider other)
     {
-        if (!other.GetComponent<Ichigo>()) return;
-        onTriggerExit?.Invoke(other);
+        if (other.GetComponent<Ichigo>() || other.GetComponent<PushBlock>())
+            onTriggerExit?.Invoke(other);
     }
-
 
     public void DrawCollider(Color _color, Matrix4x4 _matrix, Vector3 _size)
     {

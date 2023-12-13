@@ -22,6 +22,15 @@ public class MobilePlatform : Platform
         startPosition = transform.position;
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+          Debug.Log("collision");
+        if (collision.gameObject.GetComponent<Ichigo>())
+        {
+            collision.transform.SetParent(transform);
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -30,9 +39,26 @@ public class MobilePlatform : Platform
             Debug.Log("Waypoint == null");
             return;
         }
-        Move(startPosition,pointB.transform.position,speed);
+       Move(startPosition,pointB.transform.position,speed);
     }
-
+    private void OnTriggerEnter(Collider other)
+    {
+        Ichigo _chara = other.gameObject.GetComponent<Ichigo>();
+        if (_chara)
+        {
+            _chara.transform.SetParent(transform);
+            _chara.CanMove = false;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        Ichigo _chara = other.gameObject.GetComponent<Ichigo>();
+        if (_chara)
+        {
+            _chara.transform.SetParent(null);
+            _chara.CanMove = true;
+        }
+    }
 
 
     void Move(Vector3 _start,Vector3 _end, float _speed)
