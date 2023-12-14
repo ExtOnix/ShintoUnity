@@ -95,15 +95,15 @@ public class Ichigo : MonoBehaviour
         DisableMovements();
     }
 
-    void EnableMovements()
+    public void EnableMovements()
     {
-        rotate.Enable();
         move.Enable();
+        rotatePlayer.Enable();
     }
-    void DisableMovements()
+    public void DisableMovements()
     {
-        rotate.Disable();
         move.Disable();
+        rotatePlayer .Disable();
     }
     private void Update()
     {
@@ -133,6 +133,7 @@ public class Ichigo : MonoBehaviour
         RotateMesh(_movementDirection);
         if (!canMove)
             MoveWithoutGravity(_movementDirection);
+        else
         MoveWithGravity(_movementDirection);
     }
 
@@ -201,15 +202,9 @@ public class Ichigo : MonoBehaviour
         hasBomb = true;
         component.CurrentBomb.OnExplode += SetHasBomb;
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log("collision");
-     
-    }
     void DropBomb(InputAction.CallbackContext _context)
     {
         if (!hasBomb) return;
-        DisableMovements();
         OnDrop.Invoke(true);
         Bomb _bomb = component.CurrentBomb;
         if (!component || !_bomb)
@@ -217,7 +212,6 @@ public class Ichigo : MonoBehaviour
         component.Throw(Vector3.zero, Vector3.zero);
         component.CurrentBomb.OnExplode -= SetHasBomb;
         hasBomb = false;
-        EnableMovements();
         OnDrop.Invoke(false);
         //onBombSpawn.Broadcast(false);
     }
@@ -234,8 +228,7 @@ public class Ichigo : MonoBehaviour
             }
             else if (hasBomb)
             {
-            OnShoot.Invoke(true);
-                DisableMovements();
+                OnShoot.Invoke(true);
                 Bomb _bomb = component.CurrentBomb;
                 if (!component || !_bomb)
                     return;
@@ -243,7 +236,6 @@ public class Ichigo : MonoBehaviour
                 component.CurrentBomb.OnExplode -= SetHasBomb;
                 hasBomb = false;
                 //onBombSpawn.Broadcast(false);
-                EnableMovements() ;
                 OnShoot.Invoke(false);
             }
     }
@@ -253,14 +245,12 @@ public class Ichigo : MonoBehaviour
         if (hasBomb)
         {
             OnThrow.Invoke(true);
-            DisableMovements();
             if (!component || !_bomb)
                 return;
             component.Throw(mesh.transform.forward, mesh.transform.up);
             component.CurrentBomb.OnExplode -= SetHasBomb;
             hasBomb = false;
         //onBombSpawn.Broadcast(false);
-            EnableMovements();
             OnThrow.Invoke(false );
         }
     }
