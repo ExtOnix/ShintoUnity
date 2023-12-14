@@ -32,6 +32,7 @@ public class Bomb : GPEComponent
     public void Take()
     {
         body.useGravity = false;
+        body.velocity = Vector3.zero;
         percentageSpeed = holdingBombExplodePercentage;
     }
 

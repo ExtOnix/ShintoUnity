@@ -9,9 +9,8 @@ public class Magnet : AlimentableElement
     [SerializeField] bool canAttract = false;
     [SerializeField] Waypoint pointB = null;
     [SerializeField] float speed = 2;
-    [SerializeField] float length =20;
     [SerializeField] LayerMask hitLayer;
-    [SerializeField] GameObject follower = null;
+    [SerializeField] MagnetFollower follower  = null;
 
     private void Awake()
     {
@@ -32,28 +31,35 @@ public class Magnet : AlimentableElement
     private void OnCollisionEnter(Collision collision)
     {
         Ichigo _chara = collision.gameObject.GetComponent<Ichigo>();
-        if (!_chara) return;
-        ResetChara(_chara);
+        Bomb _bomb = collision.gameObject.GetComponentInChildren<Bomb>();
+        if (_chara)
+            ResetChara(_chara);
+        else if(_bomb)
+            ResetBombs(_bomb);
 
     }
     private void Update()
     {
         DetectPlayer();
-        Attract();
-    }
-    void Attract()
-    {
-        if (!canAttract) return;
-        follower.transform.position = Vector3.Lerp(follower.transform.position, new Vector3(transform.position.x, follower.transform.position.y, transform.position.z), Time.deltaTime * speed);
-
     }
 
-    private void InitMagnet(Ichigo _chara)
+    private void InitMagnetWithChara(Ichigo _chara)
     {
-        follower.transform.position = _chara.transform.position;
+        if (_chara.GetComponentInParent<MagnetFollower>()) return;
+        MagnetFollower _follower = Instantiate(follower);
+        _follower.transform.position = _chara.transform.position;
         _chara.CanMove=false;
         _chara.DisableMovements();
-        _chara.transform.SetParent(follower.transform);
+        _chara.transform.SetParent(_follower.transform);
+    }
+    void InitMagnet(Bomb _bomb)
+    {
+        if (_bomb.GetComponentInParent<MagnetFollower>()) return;
+        MagnetFollower _follower = Instantiate(follower);
+        _follower.transform.position = _bomb.transform.position;
+        _bomb.transform.SetParent(_follower.transform);
+        _bomb.Take();
+
     }
 
     private void ResetChara(Ichigo _chara)
@@ -61,6 +67,11 @@ public class Magnet : AlimentableElement
         _chara.CanMove = true;
         _chara.EnableMovements();
         _chara.transform.SetParent(null);
+    }
+
+    void ResetBombs(Bomb _bomb)
+    {
+        _bomb.transform.SetParent(null);
     }
 
     void CanAttract(bool _value)
@@ -80,7 +91,17 @@ public class Magnet : AlimentableElement
         if (_hitFwd)
         {
             Ichigo _chara = _resultFwd.collider.GetComponent<Ichigo>();
-            InitMagnet(_chara);
+            Bomb _bomb = _resultFwd.collider.GetComponentInChildren<Bomb>();
+            if (_chara)
+            {
+                InitMagnetWithChara(_chara);
+                return;
+            }
+            else if (_bomb)
+            {
+                InitMagnet(_bomb);
+                return;
+            }
         }
     }
 }

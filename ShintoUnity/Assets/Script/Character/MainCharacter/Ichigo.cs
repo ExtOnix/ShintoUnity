@@ -281,6 +281,16 @@ public class Ichigo : MonoBehaviour
         Debug.Log(currentBomb.BombName);
     }
 
+    public void AddBomb(Bomb _bomb)
+    {
+        foreach (Bomb _bombElement in inventory)
+        {
+            if (_bomb.BombName == _bombElement.BombName)
+                return;
+        }
+        inventory.Add(_bomb);
+    }
+
     void DetectObject()
     {
         bool _hitFwd = Physics.Raycast(new Ray(transform.position + transform.up, mesh.transform.forward), out RaycastHit _resultFwd, length, hitLayer);

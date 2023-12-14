@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3483698610897292534
+--- !u!1 &6658671301256483253
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,49 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6088163686851288738}
-  - component: {fileID: 1527577981784284152}
-  - component: {fileID: 195024035710763689}
-  - component: {fileID: 5686609780296441161}
-  - component: {fileID: 9128458916587153715}
-  - component: {fileID: 302927157120114174}
-  m_Layer: 10
-  m_Name: IceBomb
+  - component: {fileID: 4127728363445780908}
+  - component: {fileID: 3375825729744014666}
+  - component: {fileID: 8766387250901870778}
+  - component: {fileID: 4721239333624745231}
+  - component: {fileID: 6803365785548458861}
+  m_Layer: 0
+  m_Name: Bomb_Collectible_Ice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6088163686851288738
+--- !u!4 &4127728363445780908
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3483698610897292534}
+  m_GameObject: {fileID: 6658671301256483253}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.16, y: 0.66, z: -17.52}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: -7.30617, y: 0.93, z: -1.785162}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &1527577981784284152
+--- !u!33 &3375825729744014666
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3483698610897292534}
+  m_GameObject: {fileID: 6658671301256483253}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &195024035710763689
+--- !u!23 &8766387250901870778
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3483698610897292534}
+  m_GameObject: {fileID: 6658671301256483253}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -64,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: dfeeec3eb3382ef40bd66031d558ac4a, type: 2}
+  - {fileID: 2100000, guid: d662d4ba877b20c40afba88665ed9113, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -86,14 +85,14 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &5686609780296441161
+--- !u!135 &4721239333624745231
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3483698610897292534}
-  m_Material: {fileID: 13400000, guid: 2e5cecb423d783d45b94faa12e77f72f, type: 2}
+  m_GameObject: {fileID: 6658671301256483253}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -101,53 +100,22 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &9128458916587153715
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3483698610897292534}
-  serializedVersion: 4
-  m_Mass: 50
-  m_Drag: 0.05
-  m_AngularDrag: 0
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &302927157120114174
+--- !u!114 &6803365785548458861
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3483698610897292534}
+  m_GameObject: {fileID: 6658671301256483253}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e180922853ebb446ac29bc9805b746e, type: 3}
+  m_Script: {fileID: 11500000, guid: 2b88988d0dbd38f42a500a765ca8c0c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  body: {fileID: 9128458916587153715}
-  patern: {fileID: 2420463599920299204, guid: 2a5b7c8b49b1eed468b3361762fd579e, type: 3}
-  explodeTime: 2
-  holdingBombExplodePercentage: 1
-  bombName: Ice
+  bomb: {fileID: 302927157120114174, guid: e27e9e4f536040847a76e618016f4832, type: 3}
