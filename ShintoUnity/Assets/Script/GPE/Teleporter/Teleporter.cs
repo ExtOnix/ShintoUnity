@@ -16,6 +16,7 @@ public class Teleporter : GPEComponent
             Teleport(_chara);
     }
 
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -35,7 +36,7 @@ public class Teleporter : GPEComponent
             timer.Stop();
         };
         timer.Start();
-        _ichigo.gameObject.transform.position = teleportPoint.transform.position;
+        _ichigo.transform.position = teleportPoint.transform.position;
         //_ichigo.Arm.transform.eulerAngles = new Vector3(_ichigo.Arm.transform.eulerAngles.x,lookRotation.y, _ichigo.Arm.transform.eulerAngles.z);
     }
 }

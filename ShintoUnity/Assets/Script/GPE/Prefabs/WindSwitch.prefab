@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2984556359104837920}
   - component: {fileID: 1580625469618888376}
   - component: {fileID: 304024508596219824}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: WindSwitch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -118,5 +118,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d43548d83c569145893d16734bdc8f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  elements: []
+  elements:
+  - {fileID: 0}
   isActive: 0

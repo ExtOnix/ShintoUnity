@@ -41,7 +41,7 @@ public class Wind : GPEComponent
 
     void CheckWall()
     {
-        bool _hit = Physics.BoxCast(transform.position, windCollider.bounds.extents, transform.forward, out RaycastHit _result, Quaternion.identity, .1f, wallLayer);
+        bool _hit = Physics.BoxCast(transform.position, windCollider.bounds.extents, Direction, out RaycastHit _result, Quaternion.identity, .1f, wallLayer);
         if (_hit)
         {
             Disapear();
@@ -50,7 +50,6 @@ public class Wind : GPEComponent
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.name);
         if (!other.gameObject.GetComponent<Ichigo>()) return;
 
         WindFollower _follower = other.gameObject.GetComponent<WindFollower>();

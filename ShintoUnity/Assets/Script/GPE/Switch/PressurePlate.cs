@@ -7,8 +7,6 @@ public class PressurePlate : GPEComponent
 {
     [SerializeField] CustomCollider customCollider = null;
 
-    [SerializeField] bool isActive = false;
-
     [SerializeField] List<AlimentableElement> elements = new();
     [SerializeField] List<GameObject> objects = new();
 
@@ -22,13 +20,11 @@ public class PressurePlate : GPEComponent
 
     void OnPressActive(Collider _collier)
     {
-        isActive = true;
         foreach (AlimentableElement _element in elements)
             _element.Active();
     }
     void OnPressDisable(Collider _collier)
     {
-        isActive = false;
         foreach (AlimentableElement _element in elements)
             _element.Disable();
     }

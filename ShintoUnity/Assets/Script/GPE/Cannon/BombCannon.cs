@@ -73,7 +73,7 @@ public class BombCannon : Cannon
         Gizmos.color = Color.red;
         Gizmos.DrawRay(transform.position, transform.forward * 3);
 
-        detectZone.DrawCollider(Color.yellow, detectZone.Size);
+        detectZone.DrawSphereCollider(Color.yellow, detectZone.Size);
     }
 
 }

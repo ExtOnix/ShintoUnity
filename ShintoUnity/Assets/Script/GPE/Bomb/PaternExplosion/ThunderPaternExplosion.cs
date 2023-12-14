@@ -56,7 +56,7 @@ public class ThunderPaternExplosion : PaternExplosion
             _rotation = transform.rotation;
             _rotation.eulerAngles += new Vector3(0, i, 0);
             _matrix = Matrix4x4.TRS(transform.position, _rotation, colliders[index].transform.lossyScale);
-            colliders[index].DrawCollider(Color.yellow, _matrix, new Vector3(length, height, width));
+            colliders[index].DrawBoxCollider(Color.yellow, _matrix, new Vector3(length, height, width));
         }
     }
 }

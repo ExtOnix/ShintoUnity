@@ -5,7 +5,6 @@ using UnityEngine;
 public class Fountain : GPEComponent
 {
     [SerializeField] IceBlock prefab = null;
-    [SerializeField] BoxCollider boxCollider = null;
 
 
     void OnTriggerEnter(Collider other)

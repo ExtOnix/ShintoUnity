@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
-public class ExplosionCollider : CustomCollider
+public class ExplosionCollider : CustomBoxCollider
 {
     [SerializeField] PaternExplosion patern = null;
     public PaternExplosion Patern => patern;
