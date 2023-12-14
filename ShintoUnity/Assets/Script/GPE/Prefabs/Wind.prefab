@@ -96,10 +96,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 193
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 1847
+    m_Bits: 1846
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
@@ -127,6 +127,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   lifeSpan: 8
+  Direction: {x: -1, y: 0, z: 0}
 --- !u!54 &7897649351377845305
 Rigidbody:
   m_ObjectHideFlags: 0

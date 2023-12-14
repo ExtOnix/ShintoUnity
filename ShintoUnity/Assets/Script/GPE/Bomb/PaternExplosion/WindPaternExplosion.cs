@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,14 +31,16 @@ public class WindPaternExplosion : PaternExplosion
     {
         for (int i = 0; i < 360; i += 360/windNumber)
         {
-            Vector3 _point = transform.position + MathUtils.GetTrigoPoint(i, radius);
-            Wind _wind = Instantiate<Wind>(windRef, _point, Quaternion.LookRotation(_point - transform.position));
+            Vector3 _point = transform.position + MathUtils.GetLocalTrigoPointXZ(i, radius, transform);
+            Wind _wind = Instantiate<Wind>(windRef, _point, Quaternion.identity);
+            _wind.Direction = (_wind.transform.position - transform.position).normalized;
         }
     }
 
     void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(transform.position, boxCollider.size);
+        Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, transform.lossyScale);
+        Gizmos.DrawWireCube(Vector3.zero, boxCollider.size);
     }
 }

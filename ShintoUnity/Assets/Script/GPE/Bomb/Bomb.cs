@@ -11,7 +11,6 @@ public class Bomb : GPEComponent
     public event Action OnExplode = null;
 
     [SerializeField, Header("Physics")] Rigidbody body = null;
-    [SerializeField] LayerMask bounceLayer;
     [SerializeField, Header("Explosion")] PaternExplosion patern = null;
     [SerializeField, Range(.1f, 100)] float explodeTime = 2;
     [SerializeField, Range(0, 1)] float holdingBombExplodePercentage = 1;
@@ -24,29 +23,19 @@ public class Bomb : GPEComponent
     bool isActive = true;
     float percentageSpeed = 1;
 
-    //bool isLaunch = false;
-
-
-    public Quaternion PaternRotation => new Quaternion(0, transform.eulerAngles.y, 0, 0);
 
     public void Launch()
     {
         body.useGravity = true;
         percentageSpeed = 1;
-        //isLaunch = true;
     }
     public void Take()
     {
         body.useGravity = false;
         percentageSpeed = holdingBombExplodePercentage;
-        //isLaunch = false;
     }
 
     void Update() => UpdateTimer();
-
-    void OnTriggerEnter(Collider other)
-    {
-    }
 
     void UpdateTimer()
     {
@@ -62,7 +51,8 @@ public class Bomb : GPEComponent
     public void Explode()
     {
         OnExplode?.Invoke();
-        PaternExplosion _patern = Instantiate<PaternExplosion>(patern, transform.position, PaternRotation);
+        PaternExplosion _patern = Instantiate<PaternExplosion>(patern, transform.position, Quaternion.identity);
+        _patern.transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
         Destroy(gameObject);
     }
 

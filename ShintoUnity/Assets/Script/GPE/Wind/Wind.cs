@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Wind : GPEComponent
@@ -13,6 +14,8 @@ public class Wind : GPEComponent
     [SerializeField, Range(.1f, 100)] float lifeSpan = 5;
 
     Collider windCollider = null;
+
+    public Vector3 Direction = Vector3.forward;
 
 
     void Awake()
@@ -33,7 +36,7 @@ public class Wind : GPEComponent
 
     void UpdatePosition()
     {
-        transform.position = transform.position + transform.forward * speed * Time.deltaTime;
+        transform.position = transform.position + Direction * speed * Time.deltaTime;
     }
 
     void CheckWall()
