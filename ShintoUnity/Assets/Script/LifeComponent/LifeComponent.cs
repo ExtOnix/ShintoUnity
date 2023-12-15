@@ -18,6 +18,7 @@ public class LifeComponent : MonoBehaviour
     private void Start()
     {
         life = maxLife;
+        OnLifeChange?.Invoke();
     }
 
     public void TakeDamages(int _damage)

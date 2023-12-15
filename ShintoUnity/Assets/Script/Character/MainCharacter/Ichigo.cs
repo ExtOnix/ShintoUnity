@@ -110,6 +110,7 @@ public class Ichigo : MonoBehaviour
     private void Start()
     {
         currentBomb = inventory[0];
+        OnBombChange?.Invoke();
     }
     private void Update()
     {

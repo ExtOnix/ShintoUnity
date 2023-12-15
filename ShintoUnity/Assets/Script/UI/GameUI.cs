@@ -17,15 +17,9 @@ public class GameUI : CustomWidget
         characterLife.OnLifeChange += GenerateLife;
         character.OnBombChange += UpdateBombName;
     }
-    private void Start()
-    {
-        GenerateLife();
-        UpdateBombName();
-    }
     public override void Show()
     {
         base.Show();
-        Debug.Log("Show Game");
     }
 
     void GenerateLife()
