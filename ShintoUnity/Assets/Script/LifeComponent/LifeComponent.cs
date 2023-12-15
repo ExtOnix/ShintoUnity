@@ -6,11 +6,14 @@ using UnityEngine.Rendering;
 
 public class LifeComponent : MonoBehaviour
 {
+    public event Action OnLifeChange;
 
     [SerializeField, Range(1, 10)] int maxLife = 5;
     int life = 1;
     bool isDead = false;
     bool inInvincibility = false;
+
+    public int Life => life;
 
     private void Start()
     {
@@ -23,7 +26,7 @@ public class LifeComponent : MonoBehaviour
             return;
         life -= _damage;
         Debug.Log(life);
-        //onLifeChange.Broadcast(life);
+        OnLifeChange.Invoke();
         //onInvinsibilityStart.Broadcast();
         if (life == 0)
         {

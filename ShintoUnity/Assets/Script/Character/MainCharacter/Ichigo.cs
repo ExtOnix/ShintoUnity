@@ -10,6 +10,7 @@ using UnityEngine.Windows;
 [RequireComponent(typeof(LifeComponent), typeof(ThrowComponent))]
 public class Ichigo : MonoBehaviour
 {
+    public event Action OnBombChange;
     public event Action<float> OnMove;
     public event Action<bool> OnShoot;
     public event Action<bool> OnThrow;
@@ -39,6 +40,7 @@ public class Ichigo : MonoBehaviour
     public SpringArm Arm { get { return arm; } set { arm = value; } }
 
     public bool HasBomb { get { return hasBomb; } }
+    public Bomb CurrentBomb => currentBomb;
 
 
     #region inputs
@@ -104,6 +106,10 @@ public class Ichigo : MonoBehaviour
     {
         move.Disable();
         rotatePlayer .Disable();
+    }
+    private void Start()
+    {
+        currentBomb = inventory[0];
     }
     private void Update()
     {
@@ -264,7 +270,7 @@ public class Ichigo : MonoBehaviour
         else
             currentIndex++;
         currentBomb = inventory[currentIndex];
-        //onBombChange.Broadcast(currentBomb.BombName);
+        OnBombChange.Invoke();
         Debug.Log(currentBomb.BombName);
     }
 
@@ -277,7 +283,7 @@ public class Ichigo : MonoBehaviour
         else
             currentIndex--;
         currentBomb = inventory[currentIndex];
-        //onBombChange.Broadcast(currentBomb.BombName);
+        OnBombChange.Invoke();
         Debug.Log(currentBomb.BombName);
     }
 
