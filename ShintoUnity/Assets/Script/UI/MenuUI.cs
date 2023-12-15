@@ -50,9 +50,4 @@ public class MenuUI : CustomWidget
             yield return null;
         }
     }
-
-    void LoadGameScene()
-    {
-        SceneManager.LoadScene(AssetDatabase.GetAssetOrScenePath(asset));
-    }
 }

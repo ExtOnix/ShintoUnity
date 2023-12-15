@@ -56,6 +56,7 @@ public class Ichigo : MonoBehaviour
     [SerializeField,HideInInspector] InputAction scrollDown = null;
     [SerializeField,HideInInspector] InputAction rotatePlayer = null;
     [SerializeField,HideInInspector] InputAction respawn = null;
+    [SerializeField,HideInInspector] InputAction pause = null;
     #endregion
 
     private void Awake()
@@ -85,6 +86,8 @@ public class Ichigo : MonoBehaviour
         rotatePlayer.Enable();
         respawn = controls.Player.Respawn;
         respawn.Enable();
+        pause = controls.Player.Pause;
+        pause.Enable();
 
         shootBomb.performed += ShootBomb;
         throwBomb.performed += ThrowBomb;
@@ -93,6 +96,7 @@ public class Ichigo : MonoBehaviour
         scrollUp.performed += ScrollUp;
        rotatePlayer.performed += WalkingForward;
         respawn.performed += RespawnPlayer;
+        pause.performed += Pause;
     }
     private void OnDrawGizmos()
     {
@@ -132,8 +136,8 @@ public class Ichigo : MonoBehaviour
         shootBomb.Enable();
         scrollDown.Enable();
         scrollUp.Enable();
+        pause.Enable();
         canMove = true;
-
     }
 
     public void DisableAllInputs()
@@ -147,7 +151,7 @@ public class Ichigo : MonoBehaviour
         shootBomb .Disable();
         scrollDown.Disable();
         scrollUp.Disable();
-
+        pause.Disable();
     }
     private void Start()
     {
@@ -169,6 +173,13 @@ public class Ichigo : MonoBehaviour
     {
         Rotate();
     }
+
+    void Pause(InputAction.CallbackContext _context)
+    {
+        
+    }
+
+
     void SetHasBomb()
     {
         hasBomb = false;
