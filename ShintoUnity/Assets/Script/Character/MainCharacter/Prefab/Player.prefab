@@ -81,6 +81,7 @@ MonoBehaviour:
   controller: {fileID: 3503071593650546878}
   mesh: {fileID: 1254110642173135165}
   component: {fileID: 779154288739233304}
+  life: {fileID: 8568564263666239057}
   inventory:
   - {fileID: 302927157120114174, guid: e27e9e4f536040847a76e618016f4832, type: 3}
   - {fileID: 5098943063749994925, guid: 1c730c28b66448648a53f1d1bfe6ddc4, type: 3}
@@ -610,3 +611,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 1773392920287428078}
   player: {fileID: 3957027603800570721}
+  playerLife: {fileID: 8568564263666239057}

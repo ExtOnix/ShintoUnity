@@ -9,4 +9,5 @@ public class AnimatorParams
     public static int SHOOT_PARAM = Animator.StringToHash("shoot");
     public static int DROP_PARAM = Animator.StringToHash("drop");
     public static int THROW_PARAM = Animator.StringToHash("throw");
+    public static int DIE_PARAM = Animator.StringToHash("die");
 }

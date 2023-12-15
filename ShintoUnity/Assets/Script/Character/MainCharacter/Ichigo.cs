@@ -22,12 +22,15 @@ public class Ichigo : MonoBehaviour
     [SerializeField] MeshRenderer mesh = null;
 
     [SerializeField] ThrowComponent component = null;
+    [SerializeField] LifeComponent life = null;
 
     [SerializeField] List<Bomb> inventory = null;
     [SerializeField] Bomb currentBomb = null;
 
     [SerializeField] LayerMask hitLayer;
     [SerializeField,Range(1,10)] int length = 5;
+
+    Vector3 initLocation = Vector3.zero;
 
     bool isWalkingForward = false;
 
@@ -52,11 +55,14 @@ public class Ichigo : MonoBehaviour
     [SerializeField,HideInInspector] InputAction scrollUp = null;
     [SerializeField,HideInInspector] InputAction scrollDown = null;
     [SerializeField,HideInInspector] InputAction rotatePlayer = null;
+    [SerializeField,HideInInspector] InputAction respawn = null;
     #endregion
 
     private void Awake()
     {
         controls = new PlayerInputs();
+        life.OnDie += UpdateInputState;
+        initLocation = transform.position;
     }
 
     private void OnEnable()
@@ -77,6 +83,8 @@ public class Ichigo : MonoBehaviour
         scrollDown.Enable();
         rotatePlayer = controls.Player.RotatePlayer;
         rotatePlayer.Enable();
+        respawn = controls.Player.Respawn;
+        respawn.Enable();
 
         shootBomb.performed += ShootBomb;
         throwBomb.performed += ThrowBomb;
@@ -84,6 +92,7 @@ public class Ichigo : MonoBehaviour
         scrollDown.performed += ScrollDown;
         scrollUp.performed += ScrollUp;
        rotatePlayer.performed += WalkingForward;
+        respawn.performed += RespawnPlayer;
     }
     private void OnDrawGizmos()
     {
@@ -106,6 +115,39 @@ public class Ichigo : MonoBehaviour
     {
         move.Disable();
         rotatePlayer .Disable();
+    }
+
+    void UpdateInputState(bool _status)
+    {
+        if (!_status) EnableAllInputs(); else DisableAllInputs();
+    }
+
+    public void EnableAllInputs()
+    {
+        move.Enable();
+        rotatePlayer.Enable();
+        rotate.Enable();
+        dropBomb.Enable();
+        throwBomb.Enable();
+        shootBomb.Enable();
+        scrollDown.Enable();
+        scrollUp.Enable();
+        canMove = true;
+
+    }
+
+    public void DisableAllInputs()
+    {
+        canMove = false;
+        move.Disable();
+        rotatePlayer .Disable();
+        rotate.Disable();
+        dropBomb.Disable();
+        throwBomb.Disable();
+        shootBomb .Disable();
+        scrollDown.Disable();
+        scrollUp.Disable();
+
     }
     private void Start()
     {
@@ -189,7 +231,17 @@ public class Ichigo : MonoBehaviour
     }
     #endregion
 
-
+    void RespawnPlayer(InputAction.CallbackContext _context)
+    {
+        Respawn();
+    }
+    public void Respawn()
+    {
+        Debug.Log("respawn");
+        life.IsDead = false;
+        life.ResetLife();
+        transform.position = initLocation;
+    }
     void KeepBomb()
     {
         Bomb _bomb = component.CurrentBomb;

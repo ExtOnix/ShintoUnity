@@ -7,6 +7,7 @@ using UnityEngine.Rendering;
 public class LifeComponent : MonoBehaviour
 {
     public event Action OnLifeChange;
+    public event Action<bool> OnDie;
 
     [SerializeField, Range(1, 10)] int maxLife = 5;
     int life = 1;
@@ -14,8 +15,23 @@ public class LifeComponent : MonoBehaviour
     bool inInvincibility = false;
 
     public int Life => life;
+    public bool IsDead
+    {
+        get => isDead;
+        set
+        {
+            isDead = value;
+            OnDie?.Invoke(isDead);
+        }
+    }
 
     private void Start()
+    {
+        life = maxLife;
+        OnLifeChange?.Invoke();
+    }
+
+    public void ResetLife()
     {
         life = maxLife;
         OnLifeChange?.Invoke();
@@ -28,11 +44,9 @@ public class LifeComponent : MonoBehaviour
         life -= _damage;
         Debug.Log(life);
         OnLifeChange.Invoke();
-        //onInvinsibilityStart.Broadcast();
         if (life == 0)
         {
-            isDead = true;
-            //onDie.Broadcast();
+            IsDead = true;
             return;
         }
         inInvincibility = true;

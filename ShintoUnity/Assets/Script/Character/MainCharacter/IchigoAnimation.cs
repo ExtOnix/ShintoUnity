@@ -6,6 +6,9 @@ public class IchigoAnimation : MonoBehaviour
 {
     [SerializeField] Animator animator = null;
     [SerializeField] Ichigo player = null;
+    [SerializeField] LifeComponent playerLife = null;
+    public LifeComponent PlayerLife => playerLife;
+    public Ichigo Player => player;
 
     private void Awake()
     {
@@ -14,6 +17,8 @@ public class IchigoAnimation : MonoBehaviour
         player.OnShoot += UpdateShoot;
         player.OnThrow += UpdateThrow;
         player.OnDrop += UpdateDrop;
+        playerLife.OnDie += UpdateDie;
+
     }
 
     void UpdateForwardAnimation(float _axis)
@@ -42,5 +47,10 @@ public class IchigoAnimation : MonoBehaviour
     {
         animator.SetBool(AnimatorParams.DROP_PARAM, _shoot);
 
+    }
+
+    public void UpdateDie(bool _die)
+    {
+        animator.SetBool(AnimatorParams.DIE_PARAM,_die);
     }
 }

@@ -98,6 +98,15 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Press(behavior=2)"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Respawn"",
+                    ""type"": ""Button"",
+                    ""id"": ""d3fb2173-2e1e-43d3-a161-3f28b541323b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -287,6 +296,17 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""action"": ""RotatePlayer"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e1825f5c-4794-4560-8cd8-977f6388894a"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Respawn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -303,6 +323,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_Player_ScrollUp = m_Player.FindAction("ScrollUp", throwIfNotFound: true);
         m_Player_ScrollDown = m_Player.FindAction("ScrollDown", throwIfNotFound: true);
         m_Player_RotatePlayer = m_Player.FindAction("RotatePlayer", throwIfNotFound: true);
+        m_Player_Respawn = m_Player.FindAction("Respawn", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -372,6 +393,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_ScrollUp;
     private readonly InputAction m_Player_ScrollDown;
     private readonly InputAction m_Player_RotatePlayer;
+    private readonly InputAction m_Player_Respawn;
     public struct PlayerActions
     {
         private @PlayerInputs m_Wrapper;
@@ -384,6 +406,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         public InputAction @ScrollUp => m_Wrapper.m_Player_ScrollUp;
         public InputAction @ScrollDown => m_Wrapper.m_Player_ScrollDown;
         public InputAction @RotatePlayer => m_Wrapper.m_Player_RotatePlayer;
+        public InputAction @Respawn => m_Wrapper.m_Player_Respawn;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -417,6 +440,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @RotatePlayer.started += instance.OnRotatePlayer;
             @RotatePlayer.performed += instance.OnRotatePlayer;
             @RotatePlayer.canceled += instance.OnRotatePlayer;
+            @Respawn.started += instance.OnRespawn;
+            @Respawn.performed += instance.OnRespawn;
+            @Respawn.canceled += instance.OnRespawn;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -445,6 +471,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @RotatePlayer.started -= instance.OnRotatePlayer;
             @RotatePlayer.performed -= instance.OnRotatePlayer;
             @RotatePlayer.canceled -= instance.OnRotatePlayer;
+            @Respawn.started -= instance.OnRespawn;
+            @Respawn.performed -= instance.OnRespawn;
+            @Respawn.canceled -= instance.OnRespawn;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -472,5 +501,6 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         void OnScrollUp(InputAction.CallbackContext context);
         void OnScrollDown(InputAction.CallbackContext context);
         void OnRotatePlayer(InputAction.CallbackContext context);
+        void OnRespawn(InputAction.CallbackContext context);
     }
 }
