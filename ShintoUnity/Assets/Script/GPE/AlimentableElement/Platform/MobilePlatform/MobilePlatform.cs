@@ -8,6 +8,7 @@ public class MobilePlatform : Platform
 
     [SerializeField] Waypoint pointB = null;
     [SerializeField,Range(0,10)] float speed = 5;
+    [SerializeField] CustomBoxCollider boxCollider = null;
     Vector3 startPosition = Vector3.zero;
 
     [SerializeField]bool canMove = false;
@@ -16,6 +17,8 @@ public class MobilePlatform : Platform
     {
         OnActive += () => CanMove(true) ;
         OnDisable += () => CanMove(false);
+        boxCollider.onTriggerEnter += InitMovement;
+        boxCollider.onTriggerExit += EndMovement;
     }
     void Start()
     {
@@ -32,7 +35,7 @@ public class MobilePlatform : Platform
         }
        Move(startPosition,pointB.transform.position,speed);
     }
-    private void OnTriggerEnter(Collider other)
+    void InitMovement(Collider other)
     {
         Ichigo _chara = other.gameObject.GetComponent<Ichigo>();
         if (_chara)
@@ -41,7 +44,7 @@ public class MobilePlatform : Platform
             _chara.CanMove = false;
         }
     }
-    private void OnTriggerExit(Collider other)
+    void EndMovement(Collider other)
     {
         Ichigo _chara = other.gameObject.GetComponent<Ichigo>();
         if (_chara)
